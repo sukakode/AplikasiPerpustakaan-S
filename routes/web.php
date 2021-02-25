@@ -29,6 +29,7 @@ Route::middleware(['auth'])->group(function () {
       Route::get('/data', 'Backend\PeminjamanController@index')->name('index');
       Route::post('/', 'Backend\PeminjamanController@store')->name('store');
       Route::get('/{peminjaman}/edit', 'Backend\PeminjamanController@edit')->name('edit');
+      Route::put('/{peminjaman}/update', 'Backend\PeminjamanController@update')->name('update');
     });
 
     Route::group(['prefix' => 'pengembalian', 'as' => 'pengembalian.'], function() {

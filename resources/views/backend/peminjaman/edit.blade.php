@@ -2,8 +2,9 @@
 
 @section('content')
 <div class="col-12">
-  <form action="{{ route('peminjaman.store') }}" method="post">
+  <form action="{{ route('peminjaman.update', $peminjaman->id) }}" method="post">
     @csrf
+    @method('PUT')
     <div class="card card-outline card-primary">
       <div class="card-header">
         <h4 class="card-title">Edit Peminjaman Buku</h4>

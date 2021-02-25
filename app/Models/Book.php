@@ -2,10 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\DB;
 
-class Book extends Model
+class Book extends CustomModel
 {
   use SoftDeletes;
 
@@ -13,6 +13,5 @@ class Book extends Model
   protected $fillable = [
     'judul', 'penerbit', 'pengarang', 'tahun'
   ];
-
   
 }
