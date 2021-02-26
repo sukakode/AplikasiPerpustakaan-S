@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Book;
+use App\Models\BorrowHeader;
 
 class BukuController extends Controller
 {
@@ -15,6 +16,8 @@ class BukuController extends Controller
      */
     public function index()
     {
+      $data = BorrowHeader::first()->id;
+      dd($data);
       $buku = Book::orderBy('created_at', 'DESC')->get();
       $trashed = Book::orderBy('deleted_at', 'DESC')->onlyTrashed()->get();
       return view('backend.buku.index', compact('buku', 'trashed'));

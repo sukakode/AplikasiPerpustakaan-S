@@ -22,6 +22,7 @@ class CreateBorrowHeadersTable extends Migration
             $table->foreign('user_id')->references('id')->on('users');
             $table->unsignedBigInteger('anggota_id');
             $table->foreign('anggota_id')->references('id')->on('members');
+            $table->bigInteger('new_id')->nullable();
             $table->bigInteger('edit_id')->nullable();
             $table->softDeletes();
             $table->timestamps();

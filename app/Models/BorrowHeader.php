@@ -2,16 +2,16 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Models\CustomModel;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class BorrowHeader extends Model
+class BorrowHeader extends CustomModel
 {
   use SoftDeletes;
 
   protected $table = 'borrow_headers';
   protected $fillable = [
-    'tanggal_pinjam', 'total_buku', 'total_pinjam', 'user_id', 'anggota_id', 'edit_id'
+    'tanggal_pinjam', 'total_buku', 'total_pinjam', 'user_id', 'anggota_id', 'new_id', 'edit_id'
   ];
 
   public function detail()

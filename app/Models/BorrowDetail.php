@@ -2,10 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Models\CustomModel;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class BorrowDetail extends Model
+class BorrowDetail extends CustomModel
 {
   use SoftDeletes;
 

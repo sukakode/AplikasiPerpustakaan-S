@@ -4,7 +4,7 @@
 <div class="col-12">
   <div class="card card-outline card-primary">
     <div class="card-header">
-      <h4 class="card-title">Data Buku</h4>
+      <h4 class="card-title">Data Buku</h4> 
       <div class="card-tools">
         <button class="btn btn-xs btn-danger" data-toggle="modal" data-target="#trashed-modal">
           <span class="fa fa-trash"></span> &ensp; Data Terhapus

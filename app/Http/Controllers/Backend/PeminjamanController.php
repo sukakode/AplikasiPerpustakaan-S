@@ -124,6 +124,9 @@ class PeminjamanController extends Controller
       foreach ($peminjaman->detail as $key => $value) {
         $value->delete();
       }
+      $peminjaman->update([
+        'new_id' => $header->id
+      ]);
       $peminjaman->delete();
 
       DB::commit();
