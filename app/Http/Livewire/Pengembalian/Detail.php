@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Pengembalian;
 
+use App\Models\BorrowHeader;
 use App\Models\LoanReturn;
 use Livewire\Component;
 
@@ -9,11 +10,10 @@ class Detail extends Component
 {
   public $loan = [];
   public $header = [];
-  
 
   protected $listeners = [
     'get-pengembalian' => 'getPengembalian',
-    'clear-attr' => 'clearAttr',
+    'clear-attr' => 'clearAttr'
   ];
 
   public function render()
@@ -24,9 +24,9 @@ class Detail extends Component
   public function getPengembalian($id)
   {
     try {
-      $loan = LoanReturn::findOrFail($id);
-      $this->loan = $loan;
-      $this->header = $loan->header;
+      $header = BorrowHeader::findOrFail($id);
+      $this->header = $header;
+      $this->loan = $header->pengembalian;
       $this->emit('openDetailReturn');
     } catch (\Exception $e) {
       $this->emit('error', 'Terjadi Kesalahan !');

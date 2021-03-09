@@ -7,7 +7,7 @@
       <h4 class="card-title">Data Pengembalian Buku</h4>
       <div class="card-tools">
         <a href="{{ route('peminjaman.index') }}" class="btn btn-xs btn-success">
-          <span class="fa fa-plus"></span> &ensp; Data Peminjaman
+          <span class="fa fa-arrow-right"></span> &ensp; Data Peminjaman
         </a>
       </div>
     </div>
@@ -70,7 +70,7 @@
   </div>
 </div>
 @livewire('peminjaman.detail')
-@livewire('pengembalian.detail')
+@livewire('pengembalian.detail') 
 @endsection
 
 @section('script')

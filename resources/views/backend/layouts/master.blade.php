@@ -26,9 +26,10 @@
           <img src="{{ asset('assets') }}/dist/img/UserLogo.png " class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">{{ auth()->user()->name }}</a>
+          <a href="#" class="d-block">{{ auth()->user()->name }}</a> 
         </div>
       </div>
+      
   
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">

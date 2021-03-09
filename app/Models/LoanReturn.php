@@ -11,7 +11,7 @@ class LoanReturn extends CustomModel
 
   protected $table = 'loan_returns';
   protected $fillable = [
-    'header_id', 'tgl_kembali', 'keterlambatan', 'denda', 'denda_lainnya', 'keterangan', 'user_id'
+    'header_id', 'tgl_kembali', 'keterlambatan', 'denda', 'denda_lainnya', 'keterangan', 'user_id', 'new_id', 'edit_id'
   ];
 
   public function header()

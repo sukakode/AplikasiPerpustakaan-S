@@ -20,8 +20,17 @@ class PengembalianController extends Controller
     return view('backend.pengembalian.create', compact('peminjaman'));
   }
 
-  public function store(Request $request, $id)
+  public function destroy(LoanReturn $pengembalian)
   {
-    dd($id);
+    // dd(session()->previousUrl());
+    try {
+      $pengembalian->delete();
+      
+      session()->flash('warning', 'Data Pengembalian di-Hapus !');
+      return redirect(session()->previousUrl());
+    } catch (\Exception $e) {
+      session()->flash('error', 'Terjadi Kesalahan !');
+      return redirect()->back();
+    }
   }
 }

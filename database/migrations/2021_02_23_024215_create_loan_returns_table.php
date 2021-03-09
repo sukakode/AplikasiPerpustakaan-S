@@ -24,6 +24,8 @@ class CreateLoanReturnsTable extends Migration
             $table->string('keterangan', 100)->nullable();
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
+            $table->bigInteger('new_id')->nullable();
+            $table->bigInteger('edit_id')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

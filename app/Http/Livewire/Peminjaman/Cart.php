@@ -100,6 +100,7 @@ class Cart extends Component
       
       foreach ($header->detail as $key => $value) {
         $this->id_buku = $value->buku_id;
+        $this->qty = $value->jumlah;
         $this->addBuku();
       }
 

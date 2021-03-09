@@ -40,7 +40,7 @@
                           <span class="fa fa-info"></span>
                         </button>
                         @if ($item->pengembalian)
-                          <button data-id="{{ $item->pengembalian->id }}" class="btn btn-primary pr-3 pl-3 btn-sm info-pengembalian">
+                          <button data-id="{{ $item->id }}" class="btn btn-primary pr-3 pl-3 btn-sm info-pengembalian">
                             <span class="fa fa-check"></span>
                           </button>
                         @else
@@ -67,11 +67,14 @@
 @livewire('peminjaman.detail')
 @livewire('pengembalian.create')
 @livewire('pengembalian.detail')
+@livewire('pengembalian.edit')
 @endsection
 
 @section('script')
 <script>
   $(document).ready(function() {
+
+    // Info Peminjaman
     $('.info-peminjaman').on('click', function(data) {
       var id = $(this).data('id');
       window.livewire.emit('get-peminjaman', id);
@@ -84,7 +87,9 @@
     $('#modal-detail').on('hidden.bs.modal', function() {
       window.livewire.emit('clear-attr');
     });
+    // End
 
+    // Pengembalian
     $('.pengembalian').on('click', function() {
       var id = $(this).data('id');
       window.livewire.emit('do-pengembalian', id);
@@ -101,7 +106,9 @@
     $('#modal-pengembalian').on('hidden.bs.modal', function() {
       window.livewire.emit('clear-attr');
     });
+    // End
     
+    // Info Pengembalian
     $('.info-pengembalian').on('click', function(data) {
       var id = $(this).data('id');
       window.livewire.emit('get-pengembalian', id);
@@ -110,10 +117,29 @@
     window.livewire.on('openDetailReturn', () => {
       $('#modal-detail-return').modal('show');
     });
+    
+    window.livewire.on('closePengembalianDetail', () => {
+      $('#modal-detail-return').modal('hide');
+    });
 
     $('#modal-detail-return').on('hidden.bs.modal', function() {
       window.livewire.emit('clear-attr');
     });
+    // End
+
+    // Info Pengembalian
+    window.livewire.on('openPengembalianEdit', () => {
+      $('#modal-pengembalian-edit').modal('show');
+    });
+    
+    window.livewire.on('closePengembalianEdit', () => {
+      $('#modal-pengembalian-edit').modal('hide');
+    });
+
+    $('#modal-pengembalian-edit').on('hidden.bs.modal', function() {
+      window.livewire.emit('clear-attr-edit');
+    });
+    // End
 
     window.livewire.on('reloadPage', () => {
       window.location.reload();

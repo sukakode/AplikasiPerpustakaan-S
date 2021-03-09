@@ -30,10 +30,12 @@ Route::middleware(['auth'])->group(function () {
       Route::post('/', 'Backend\PeminjamanController@store')->name('store');
       Route::get('/{peminjaman}/edit', 'Backend\PeminjamanController@edit')->name('edit');
       Route::put('/{peminjaman}/update', 'Backend\PeminjamanController@update')->name('update');
+      Route::delete('/{peminjaman}/delete', 'Backend\PeminjamanController@destroy')->name('destroy');
     });
-
+    
     Route::group(['prefix' => 'pengembalian', 'as' => 'pengembalian.'], function() {
       Route::get('/', 'Backend\PengembalianController@index')->name('index');
+      Route::delete('/{pengembalian}/delete', 'Backend\PengembalianController@destroy')->name('destroy');
     });
   
     Route::group(['prefix' => 'restore', 'as' => 'restore.'], function () {

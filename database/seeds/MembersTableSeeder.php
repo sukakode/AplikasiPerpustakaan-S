@@ -34,7 +34,7 @@ class MembersTableSeeder extends Seeder
         try {
           $member = Member::firstOrCreate($value);
         } catch (\Exception $e) {
-          echo $e;
+          echo $e->getMessage();
         }
       }
     }

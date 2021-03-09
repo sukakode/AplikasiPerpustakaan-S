@@ -101,8 +101,12 @@
         </div>
         <div class="modal-footer text-right">
           @if (!empty($header))
-            <a href="#" class="btn btn-danger">Hapus Data</a>
-            <a href="#" class="btn btn-warning">Edit Data</a>
+            <form action="{{ route('pengembalian.destroy', $loan->id) }}" method="post">
+              @csrf
+              @method('DELETE')
+              <button type="submit" class="btn btn-danger">Hapus Data </button>
+            </form>
+            <button type="button" class="btn btn-warning pengembalian-edit" wire:click="$emit('do-pengembalian-edit', '{{ $loan->id }}')">Edit Data</button>
           @endif
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup Modal</button>
         </div>

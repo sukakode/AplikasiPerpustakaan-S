@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Book;
 use App\Models\BorrowDetail;
 use App\Models\BorrowHeader;
+use App\Models\LoanReturn;
 use App\Models\Member;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
@@ -129,12 +130,27 @@ class PeminjamanController extends Controller
       ]);
       $peminjaman->delete();
 
+      $pengembalian = DB::table('loan_returns')->where('header_id', '=', $peminjaman->id)->update(['header_id' => $header->id]);
+
       DB::commit();
       session()->flash('warning', 'Data Transaksi Peminjaman di-Ubah !');
       return redirect(route('peminjaman.index'));
     } catch (\Exception $e) {
       DB::rollback();
       dd($e);
+      session()->flash('error', 'Terjadi Kesalahan !');
+      return redirect()->back();
+    }
+  }
+
+  public function destroy(Request $request, BorrowHeader $peminjaman)
+  {
+    try {
+      $peminjaman->delete();
+
+      session()->flash('warning', 'Data Peminjaman di-Hapus !');
+      return redirect(route('peminjaman.index'));
+    } catch (\Exception $e) {
       session()->flash('error', 'Terjadi Kesalahan !');
       return redirect()->back();
     }

@@ -37,7 +37,7 @@ class BooksTableSeeder extends Seeder
         try {
           $book = Book::firstOrCreate($value);
         } catch (\Exception $e) {
-          echo $e;
+          echo $e->getMessage();
         }
       }
     }

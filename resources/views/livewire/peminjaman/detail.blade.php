@@ -14,7 +14,7 @@
           @else
             <div class="row">
               <div class="col-lg-6 col-xl-6 mb-2">
-                <h6>Tanggal Peminjaman : {{ $header->tanggal_pinjam }}</h6>
+                <h6>Tanggal Peminjaman : {{ date('d/m/Y', strtotime($header->tanggal_pinjam)) }}</h6>
                 <h6>Penginput Data : {{ $header->user->name }}</h6>
                 <h6>Nama Peminjam : {{ $header->anggota->nama_anggota }}</h6>
                 <h6>Total Buku : {{ $header->total_buku }} Judul</h6>
@@ -60,8 +60,16 @@
         </div>
         <div class="modal-footer text-right">
           @if (!empty($header))
-            <a href="#" class="btn btn-danger">Hapus Data</a>
-            <a href="{{ route('peminjaman.edit', $header->id) }}" class="btn btn-warning">Edit Data</a>
+            @if (in_array("Super Admin", auth()->user()->getRoleNames()->toArray()))
+              @if ($header->pengembalian == null)
+                <form action="{{ route('peminjaman.destroy', $header->id) }}" method="post">
+                  @csrf
+                  @method('DELETE')
+                  <button type="submit" class="btn btn-danger">Hapus Data </button>
+                </form>
+                <a href="{{ route('peminjaman.edit', $header->id) }}" class="btn btn-warning">Edit Data</a>
+              @endif
+            @endif
           @endif
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup Modal</button>
         </div>
