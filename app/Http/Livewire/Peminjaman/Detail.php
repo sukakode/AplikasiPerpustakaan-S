@@ -11,6 +11,7 @@ class Detail extends Component
 
   protected $listeners = [
     'get-peminjaman' => 'getPeminjaman',
+    'get-peminjaman-trashed' => 'getPeminjamanTrashed',
     'clear-attr' => 'clearAttr',
   ];
 
@@ -23,6 +24,17 @@ class Detail extends Component
   {
     try {
       $header = BorrowHeader::findOrFail($id);
+      $this->header = $header;
+      $this->emit('openDetail');
+    } catch (\Exception $e) {
+      $this->emit('error', 'Terjadi Kesalahan !');
+    }
+  }
+  
+  public function getPeminjamanTrashed($id)
+  {
+    try {
+      $header = BorrowHeader::onlyTrashed()->findOrFail($id);
       $this->header = $header;
       $this->emit('openDetail');
     } catch (\Exception $e) {

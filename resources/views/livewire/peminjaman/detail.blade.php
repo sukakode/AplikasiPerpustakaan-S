@@ -19,18 +19,24 @@
                 <h6>Nama Peminjam : {{ $header->anggota->nama_anggota }}</h6>
                 <h6>Total Buku : {{ $header->total_buku }} Judul</h6>
                 <h6>Jumlah Buku : {{ $header->total_pinjam }} Buku</h6>
-                <h6>
-                  Status : &ensp;
-                  @if ($header->pengembalian)
-                    <span class="badge badge-success">
-                      &ensp; <i class="fa fa-check"></i> &ensp; Sudah di-Kembalikan &ensp;
-                    </span>
-                  @else
-                    <span class="badge badge-danger">
-                      &ensp; <i class="fa fa-times"></i> &ensp; Belum di-Kembalikan &ensp;
-                    </span>
-                  @endif
-                </h6>
+                @if ($header->deleted_at != null) 
+                  <span class="badge badge-danger">
+                    &ensp; <i class="fa fa-trash"></i> &ensp; Data Trashed &ensp;
+                  </span>
+                @else
+                  <h6>
+                    Status : &ensp;
+                    @if ($header->pengembalian)
+                      <span class="badge badge-success">
+                        &ensp; <i class="fa fa-check"></i> &ensp; Sudah di-Kembalikan &ensp;
+                      </span>
+                    @else
+                      <span class="badge badge-danger">
+                        &ensp; <i class="fa fa-times"></i> &ensp; Belum di-Kembalikan &ensp;
+                      </span>
+                    @endif
+                  </h6>
+                @endif
               </div>
               <div class="col-lg-6 col-xl-6 mb-2">
                 <div class="table-responsive">
@@ -62,12 +68,14 @@
           @if (!empty($header))
             @if (in_array("Super Admin", auth()->user()->getRoleNames()->toArray()))
               @if ($header->pengembalian == null)
-                <form action="{{ route('peminjaman.destroy', $header->id) }}" method="post">
-                  @csrf
-                  @method('DELETE')
-                  <button type="submit" class="btn btn-danger">Hapus Data </button>
-                </form>
-                <a href="{{ route('peminjaman.edit', $header->id) }}" class="btn btn-warning">Edit Data</a>
+                @if ($header->deleted_at == null)
+                  <form action="{{ route('peminjaman.destroy', $header->id) }}" method="post">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-danger">Hapus Data </button>
+                  </form>
+                  <a href="{{ route('peminjaman.edit', $header->id) }}" class="btn btn-warning">Edit Data</a>
+                @endif
               @endif
             @endif
           @endif

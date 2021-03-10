@@ -7,7 +7,6 @@ use App\Http\Controllers\Controller;
 use App\Models\Book;
 use App\Models\BorrowDetail;
 use App\Models\BorrowHeader;
-use App\Models\LoanReturn;
 use App\Models\Member;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
@@ -17,8 +16,8 @@ class PeminjamanController extends Controller
   public function index()
   {
     $peminjaman = BorrowHeader::orderBy('created_at', 'DESC')->get();
-
-    return view('backend.peminjaman.index', compact('peminjaman'));
+    $trashed = BorrowHeader::onlyTrashed()->where('new_id', '=', null)->orderBy('deleted_at', 'DESC')->get();
+    return view('backend.peminjaman.index', compact('peminjaman', 'trashed'));
   }
 
   public function create()
@@ -143,15 +142,35 @@ class PeminjamanController extends Controller
     }
   }
 
-  public function destroy(Request $request, BorrowHeader $peminjaman)
+  public function destroy(Request $request, $peminjaman)
   {
     try {
-      $peminjaman->delete();
+      $data = BorrowHeader::withTrashed()->findOrFail($peminjaman);
+      if (!$data->trashed()) {
+        $data->delete();
+        session()->flash('warning', 'Data Peminjaman di-Hapus !');
+      } else {
+        session()->flash('error', 'Data Peminjaman di-Hapus Permanen !');
+        $data->forceDelete();
+      }
 
-      session()->flash('warning', 'Data Peminjaman di-Hapus !');
       return redirect(route('peminjaman.index'));
     } catch (\Exception $e) {
       session()->flash('error', 'Terjadi Kesalahan !');
+      return redirect()->back();
+    }
+  }
+
+  public function restore($id)
+  {
+    try {
+      $peminjaman = BorrowHeader::onlyTrashed()->findOrFail($id);
+      $peminjaman->restore();
+
+      session()->flash('success', 'Berhasil Memulihkan Data Peminjaman !');
+      return redirect(route('peminjaman.index'));
+    } catch (\Exception $e) {
+      session()->flash('error', 'Terjadi Kesalahan Saat Memulihkan Data Peminjaman Buku !');
       return redirect()->back();
     }
   }

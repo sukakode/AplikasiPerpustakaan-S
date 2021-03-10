@@ -16,7 +16,7 @@ class CreateLoanReturnsTable extends Migration
         Schema::create('loan_returns', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('header_id');
-            $table->foreign('header_id')->references('id')->on('borrow_headers');
+            $table->foreign('header_id')->references('id')->on('borrow_headers')->onDelete('cascade');
             $table->date('tgl_kembali');
             $table->double('keterlambatan');
             $table->double('denda')->default(0);

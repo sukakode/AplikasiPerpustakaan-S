@@ -29,6 +29,7 @@ class Detail extends Component
       $this->loan = $header->pengembalian;
       $this->emit('openDetailReturn');
     } catch (\Exception $e) {
+      dd($e);
       $this->emit('error', 'Terjadi Kesalahan !');
     }
   }
