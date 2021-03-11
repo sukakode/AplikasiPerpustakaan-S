@@ -6,6 +6,9 @@
     <div class="card-header">
       <h4 class="card-title">Data Buku</h4> 
       <div class="card-tools">
+        <a href="{{ route('print.buku') }}" target="_blank" class="btn btn-xs btn-info">
+          <span class="fa fa-print"></span> &ensp; Print Data
+        </a>
         <button class="btn btn-xs btn-danger" data-toggle="modal" data-target="#trashed-modal">
           <span class="fa fa-trash"></span> &ensp; Data Terhapus
         </button>
@@ -18,12 +21,14 @@
       <div class="table-responsive">
         <table class="table table-bordered m-0">
           <thead>
-            <th class="text-center">No.</th>
-            <th class="text-center">Judul</th>
-            <th class="text-center">Pengarang</th>
-            <th class="text-center">Penerbit</th>
-            <th class="text-center">Tahun Terbit</th>
-            <th class="text-center">Aksi</th>
+            <tr>
+              <th class="text-center">No.</th>
+              <th class="text-center">Judul</th>
+              <th class="text-center">Pengarang</th>
+              <th class="text-center">Penerbit</th>
+              <th class="text-center">Tahun Terbit</th>
+              <th class="text-center">Aksi</th>
+            </tr>
           </thead>
           <tbody>
             @forelse ($buku as $item)

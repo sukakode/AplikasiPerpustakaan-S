@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Book;
+use PDF;
 
 class BukuController extends Controller
 {
@@ -163,5 +164,11 @@ class BukuController extends Controller
       }
     }
 
-
+    public function print()
+    {
+      $tgl = date('d/m/Y H:i:s');
+      $data = Book::orderBy('created_at', 'DESC')->get();
+      $pdf = PDF::loadview('backend.print.buku', compact('tgl', 'data'));
+      return $pdf->stream();
+    }
 }

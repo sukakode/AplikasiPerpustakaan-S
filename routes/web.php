@@ -44,6 +44,10 @@ Route::middleware(['auth'])->group(function () {
       Route::put('peminjaman/{id}', 'Backend\PeminjamanController@restore')->name('peminjaman');
       Route::put('pengembalian/{id}', 'Backend\PengembalianController@restore')->name('pengembalian');
     });
+
+    Route::group(['prefix' => 'exportPrint', 'as' => 'print.'], function() {
+      Route::get('buku', 'Backend\BukuController@print')->name('buku');
+    });
   });
 });
 
