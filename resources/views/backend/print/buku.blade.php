@@ -54,7 +54,7 @@
 		<tbody> 
       @forelse ($data as $item)
         <tr>
-          <td class="text-center p-2">{{ $loop->iteration }}.</td>
+          <td class="text-center p-2">{{ $loop->iteration }}</td>
           <td class="text-center p-2">{{ $item->judul }}</td>
           <td class="text-center p-2">{{ $item->pengarang }}</td>
           <td class="text-center p-2">{{ $item->penerbit }}</td>

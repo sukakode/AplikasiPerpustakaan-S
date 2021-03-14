@@ -53,7 +53,7 @@
     <tbody>
       @forelse ($data as $item)
         <tr>
-          <td class="text-center p-2">{{ $loop->iteration }}.</td>
+          <td class="text-center p-2">{{ $loop->iteration }}</td>
           <td class="text-center p-2">{{ $item->name }}</td>
           <td class="text-center p-2">{{ $item->email }}</td>
           <td class="text-center p-2">{{ $item->getRoleNames()->first() }}</td> 

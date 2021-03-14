@@ -37,7 +37,7 @@
               <tbody>
                 @forelse ($pengembalian as $item)
                   <tr>
-                    <td class="text-center">{{ $loop->iteration }}</td>
+                    <td class="text-center">{{ $loop->iteration }}.</td>
                     <td class="text-center">
                       <button data-id="{{ $item->header_id }}" class="btn btn-sm btn-info pr-3 pl-3 info-peminjaman">
                         Lihat Data
@@ -107,7 +107,7 @@
             <tbody>
               @forelse ($trashed as $item)
                 <tr>
-                  <td class="text-center">{{ $loop->iteration }}</td>
+                  <td class="text-center">{{ $loop->iteration }}.</td>
                   <td class="text-center">
                     <button data-id="{{ $item->header_id }}" class="btn btn-sm btn-info pr-3 pl-3 info-peminjaman">
                       Lihat Data

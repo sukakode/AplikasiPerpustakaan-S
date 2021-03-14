@@ -53,7 +53,7 @@
     <tbody>
       @forelse ($data as $item)
         <tr>
-          <td class="text-center p-2">{{ $loop->iteration }}.</td>
+          <td class="text-center p-2">{{ $loop->iteration }}</td>
           <td class="text-center p-2">{{ $item->nama_anggota}}</td>
           <td class="text-center p-2">{{ $item->alamat_anggota}}</td>
           <td class="text-center p-2">(+62) {{ $item->telp_anggota}}</td> 

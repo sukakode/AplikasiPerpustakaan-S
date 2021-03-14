@@ -35,7 +35,7 @@
               <tbody>
                 @forelse ($peminjaman as $item)
                   <tr>
-                    <td class="text-center">{{ $loop->iteration }}</td>
+                    <td class="text-center">{{ $loop->iteration }}.</td>
                     <td class="text-center">{{ date('d/m/Y', strtotime($item->tanggal_pinjam)) }}</td>
                     <td class="text-center">{{ $item->anggota->nama_anggota }}</td>
                     <td class="text-center">{{ $item->user->name }}</td>
@@ -101,7 +101,7 @@
             <tbody>
               @forelse ($trashed as $item)
                 <tr>
-                  <td class="text-center">{{ $loop->iteration }}</td>
+                  <td class="text-center">{{ $loop->iteration }}.</td>
                   <td class="text-center">{{ date('d/m/Y', strtotime($item->tanggal_pinjam)) }}</td>
                   <td class="text-center">{{ $item->anggota->nama_anggota }}</td>
                   <td class="text-center">{{ $item->user->name }}</td>
