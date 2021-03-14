@@ -10,6 +10,7 @@ use App\Models\BorrowHeader;
 use App\Models\Member;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
+use PDF;
 
 class PeminjamanController extends Controller
 {
@@ -173,5 +174,20 @@ class PeminjamanController extends Controller
       session()->flash('error', 'Terjadi Kesalahan Saat Memulihkan Data Peminjaman Buku !');
       return redirect()->back();
     }
+  }
+  
+  public function print()
+  {
+    $tgl = date('d/m/Y H:i:s');
+    $data = BorrowHeader::with('detail')
+      ->with('pengembalian')
+      ->with('anggota')
+      ->with('user')
+      ->with('detail.buku')
+      ->orderBy('created_at', 'DESC')
+      ->get()->toArray(); 
+    // dd($data);
+    $pdf = PDF::loadview('backend.print.peminjaman', compact('tgl', 'data'));
+    return $pdf->stream();
   }
 }

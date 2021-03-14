@@ -6,6 +6,9 @@
     <div class="card-header">
       <h4 class="card-title">Data Anggota Perpustakaan</h4>
       <div class="card-tools">
+        <a href="{{ route('print.anggota') }}" target="_blank" class="btn btn-xs btn-info">
+          <span class="fa fa-print"></span> &ensp; Print Data
+        </a>
         <button class="btn btn-danger btn-xs" data-toggle="modal" data-target="#trashed-modal">
           <span class="fa fa-trash"></span> &ensp; Data Terhapus
         </button>

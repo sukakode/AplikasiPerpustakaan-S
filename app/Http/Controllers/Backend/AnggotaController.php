@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Member;
+use PDF;
 
 class AnggotaController extends Controller
 {
@@ -156,5 +157,13 @@ class AnggotaController extends Controller
         session()->flash('error', 'Terjadi Kesalahan Saat Memulihkan Data Anggota !');
         return redirect()->back();
       }
+    }
+
+    public function print()
+    {
+      $tgl = date('d/m/Y H:i:s');
+      $data = Member::orderBy('created_at', 'DESC')->get();
+      $pdf = PDF::loadview('backend.print.anggota', compact('tgl', 'data'));
+      return $pdf->stream();
     }
 }

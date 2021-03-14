@@ -13,7 +13,7 @@
     </div>
     <div class="col-lg-2 col-xl-2">
       <label for="">Jumlah : </label>
-      <input type="number" wire:model="qty" id="qty" class="form-control" pattern="/d*" placeholder="Min. 1" min="1" >
+      <input type="number" wire:model="qty" id="qty" wire:keydown.enter="addBuku()" class="form-control" pattern="/d*" placeholder="Min. 1" min="1" >
     </div>
     <div class="col-lg-1 col-xl-1">
       <div class="form-group">
@@ -113,6 +113,10 @@
 
     $('#buku_id').on('select2:select', function (e) {
       window.livewire.emit('checkBuku', e.params.data.id);
+    });
+
+    $('#qty').on('keydown', function(e) {
+      e.preventDefault();
     });
   });
 </script>

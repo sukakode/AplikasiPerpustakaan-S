@@ -8,6 +8,9 @@
         Data Petugas
       </h4>
       <div class="card-tools">
+        <a href="{{ route('print.petugas') }}" target="_blank" class="btn btn-xs btn-info">
+          <span class="fa fa-print"></span> &ensp; Print Data
+        </a>
         <button class="btn btn-xs btn-danger" data-toggle="modal" data-target="#trashed-modal">
           <span class="fa fa-trash"></span> &ensp; Data Terhapus
         </button>

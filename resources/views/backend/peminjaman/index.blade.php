@@ -6,6 +6,9 @@
     <div class="card-header">
       <h4 class="card-title">Data Peminjaman Buku</h4>
       <div class="card-tools">
+        <a href="{{ route('print.peminjaman') }}" target="_blank" class="btn btn-xs btn-info">
+          <span class="fa fa-print"></span> &ensp; Print Data
+        </a>
         <button class="btn btn-xs btn-danger" data-toggle="modal" data-target="#trashed-modal">
           <span class="fa fa-trash"></span> &ensp; Data Terhapus
         </button>
@@ -135,9 +138,8 @@
           </table>
         </div>
       </div>
-      <div class="modal-footer justify-content-between">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+      <div class="modal-footer float-right">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup Modal</button>
       </div>
     </div>
   </div>

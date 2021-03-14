@@ -34,7 +34,7 @@
     <img src="{{ public_path('images') }}/SK.png" class="header-image">
     Suka Kode - Program Perpustakaan 
     <br>
-    Laporan Data Buku
+    Laporan Data Petugas
     <small class="float-right">
       Tanggal Print : {{ $tgl }}
     </small> 
@@ -45,29 +45,25 @@
     <thead>
       <tr>
         <th class="text-center">No.</th>
-        <th class="text-center">Judul</th>
-        <th class="text-center">Pengarang</th>
-        <th class="text-center">Penerbit</th>
-        <th class="text-center">Tahun</th>
+        <th class="text-center">Nama Petugas</th>
+        <th class="text-center">E-Mail Petugas</th>
+        <th class="text-center">Level Petugas</th> 
       </tr>
     </thead>
-		<tbody> 
+    <tbody>
       @forelse ($data as $item)
         <tr>
           <td class="text-center p-2">{{ $loop->iteration }}.</td>
-          <td class="text-center p-2">{{ $item->judul }}</td>
-          <td class="text-center p-2">{{ $item->pengarang }}</td>
-          <td class="text-center p-2">{{ $item->penerbit }}</td>
-          <td class="text-center p-2">{{ $item->tahun }}</td>
+          <td class="text-center p-2">{{ $item->name }}</td>
+          <td class="text-center p-2">{{ $item->email }}</td>
+          <td class="text-center p-2">{{ $item->getRoleNames()->first() }}</td> 
         </tr>
       @empty
         <tr>
-          <td colspan="5" class="text-center">
-            Belum Ada Data.
-          </td>
+          <td colspan="4" class="text-center">Belum Ada Data Petugas.</td>
         </tr>
       @endforelse
-		</tbody>
+    </tbody> 
 	</table>
 
 </body>

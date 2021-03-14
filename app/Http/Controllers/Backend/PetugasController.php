@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\User;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role;
+use PDF;
 
 class PetugasController extends Controller
 {
@@ -204,5 +205,13 @@ class PetugasController extends Controller
         session()->flash('error', 'Terjadi Kesalahan Saat Memulihkan Data Petugas !');
         return redirect()->back();
       }
+    }
+
+    public function print()
+    {
+      $tgl = date('d/m/Y H:i:s');
+      $data = User::orderBy('created_at', 'ASC')->get(); 
+      $pdf = PDF::loadview('backend.print.petugas', compact('tgl', 'data'));
+      return $pdf->stream();
     }
 }

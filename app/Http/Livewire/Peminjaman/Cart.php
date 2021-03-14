@@ -71,6 +71,9 @@ class Cart extends Component
     if (!$cek) {
       $this->resetVar();
     } else {
+      if ($this->qty < 1) {
+        $this->qty = 1;
+      }
       $this->detail_buku['qty'] = $this->qty;
       $this->pinjam[$this->id_buku] = $this->detail_buku->toArray();
 

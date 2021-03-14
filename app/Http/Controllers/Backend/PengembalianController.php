@@ -6,13 +6,14 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\BorrowHeader;
 use App\Models\LoanReturn;
+use PDF;
 
 class PengembalianController extends Controller
 {
   public function index()
   {
     $pengembalian = LoanReturn::orderBy('created_at', 'DESC')->get();
-    $trashed = LoanReturn::onlyTrashed()->orderBy('deleted_at', 'DESC')->get();
+    $trashed = LoanReturn::onlyTrashed()->where('new_id', '=', null)->orderBy('deleted_at', 'DESC')->get();
     return view('backend.pengembalian.index', compact('pengembalian', 'trashed'));
   }
 
@@ -52,5 +53,14 @@ class PengembalianController extends Controller
       session()->flash('error', 'Terjadi Kesalahan Saat Memulihkan Data Pengembalian Buku !');
       return redirect()->back();
     }
+  }
+
+  public function print()
+  {
+    $tgl = date('d/m/Y H:i:s');
+    $data = LoanReturn::orderBy('created_at', 'ASC')->get(); 
+    // dd($data->sum('denda_lainnya'));
+    $pdf = PDF::loadview('backend.print.pengembalian', compact('tgl', 'data'));
+    return $pdf->stream();
   }
 }
