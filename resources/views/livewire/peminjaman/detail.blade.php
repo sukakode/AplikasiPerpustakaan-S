@@ -35,6 +35,14 @@
                         &ensp; <i class="fa fa-times"></i> &ensp; Belum di-Kembalikan &ensp;
                       </span>
                     @endif
+                    
+                    @if ($header->edit_id != null)
+                    <a href="{{ route('peminjaman.history', $header->id) }}">
+                      <span class="badge badge-info">
+                        &ensp; <i class="fa fa-edit"></i> &ensp; Data Pernah di-Edit / di-Ubah
+                      </span>
+                    </a>
+                    @endif
                   </h6>
                 @endif
               </div>

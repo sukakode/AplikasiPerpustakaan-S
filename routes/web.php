@@ -30,6 +30,7 @@ Route::middleware(['auth'])->group(function () {
       Route::get('/{peminjaman}/edit', 'Backend\PeminjamanController@edit')->name('edit');
       Route::put('/{peminjaman}/update', 'Backend\PeminjamanController@update')->name('update');
       Route::delete('/{peminjaman}/delete', 'Backend\PeminjamanController@destroy')->name('destroy');
+      Route::get('/{peminjaman}/history', 'Backend\PeminjamanController@history')->name('history');
     });
 
     Route::group(['prefix' => 'pengembalian', 'as' => 'pengembalian.'], function() {

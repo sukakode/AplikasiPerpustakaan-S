@@ -190,4 +190,11 @@ class PeminjamanController extends Controller
     $pdf = PDF::loadview('backend.print.peminjaman', compact('tgl', 'data'));
     return $pdf->stream();
   }
+
+  public function history(BorrowHeader $peminjaman)
+  {
+    return view('backend.peminjaman.history', [
+      'header' => $peminjaman,
+    ]);
+  }
 }
