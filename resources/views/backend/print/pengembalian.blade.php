@@ -79,6 +79,12 @@
         <td colspan="6" class="p-1" style="background-color: #e9e9e9;"></td>
       </tr>
       <tr>
+        <td class="text-right p-2 font-weight-bold" colspan="3"></td>
+        <td class="text-center p-2"><small class="font-weight-bold">Denda</small></td>
+        <td class="text-center p-2"><small class="font-weight-bold">Denda Lainnya</small></td>
+        <td class="text-center p-2"><small class="font-weight-bold">Denda + Lainnya</small></td>
+      </tr>
+      <tr>
         <td class="text-right p-2 font-weight-bold" colspan="3">Total : </td>
         <td class="text-center p-2"><small class="font-weight-bold">Rp. {{ number_format($data->sum('denda'), 0, ',', '.') }}</small></td>
         <td class="text-center p-2"><small class="font-weight-bold">Rp. {{ number_format($data->sum('denda_lainnya'), 0, ',', '.') }}</small></td>

@@ -17,34 +17,34 @@
                 <div class="table-responsive">
                   <table class="table">
                     <tr>
-                      <td width="40%" style="border-top: 0px;"><h6>Tanggal Pengembalian </h6></td>
-                      <td style="border-top: 0px;">:</td>
-                      <td style="border-top: 0px;"><h6>{{ date('d/m/Y', strtotime($loan->tgl_kembali)) }}</h6></td>
+                      <td class="p-2" width="40%" style="border-top: 0px;"><h6 class="text-nowrap mb-0">Tanggal Pengembalian </h6></td>
+                      <td class="p-2" style="border-top: 0px;">:</td>
+                      <td class="p-2" style="border-top: 0px;"><h6 class="mb-0">{{ date('d/m/Y', strtotime($loan->tgl_kembali)) }}</h6></td>
                     </tr>
                     <tr>
-                      <td><h6>Penginput Data</h6></td>
-                      <td>:</td>
-                      <td><h6>{{ $loan->user->name }} </h6></td>
+                      <td class="p-2"><h6 class="mb-0" >Penginput Data</h6></td>
+                      <td class="p-2"><h6 class="mb-0">:</h6></td>
+                      <td class="p-2"><h6 class="mb-0">{{ $loan->user->name }} </h6></td>
                     </tr>
                     <tr>
-                      <td><h6>Keterlambatan </h6></td>
-                      <td>:</td>
-                      <td><h6>{{ $loan->keterlambatan }} Hari</h6></td>
+                      <td class="p-2"><h6 class="mb-0">Keterlambatan </h6></td>
+                      <td class="p-2"><h6 class="mb-0">:</h6></td>
+                      <td class="p-2"><h6 class="mb-0">{{ $loan->keterlambatan }} Hari</h6></td>
                     </tr>
                     <tr>
-                      <td><h6>Denda</h6></td>
-                      <td>:</td>
-                      <td><h6><u>Rp. {{ number_format($loan->denda, 0, ',', '.') }}</u></h6></td>
+                      <td class="p-2"><h6 class="mb-0">Denda</h6></td>
+                      <td class="p-2"><h6 class="mb-0">:</h6></td>
+                      <td class="p-2"><h6 class="mb-0"><u>Rp. {{ number_format($loan->denda, 0, ',', '.') }}</u></h6></td>
                     </tr>
                     <tr>
-                      <td><h6>Denda Lainnya</u></h6></td>
-                      <td>:</td>
-                      <td><h6><u>Rp. {{ number_format($loan->denda_lainnya, 0, ',', '.') }}</h6></td>
+                      <td class="p-2"><h6 class="mb-0">Denda Lainnya</u></h6></td>
+                      <td class="p-2"><h6 class="mb-0">:</h6></td>
+                      <td class="p-2"><h6 class="mb-0"><u>Rp. {{ number_format($loan->denda_lainnya, 0, ',', '.') }}</h6></td>
                     </tr>
                     <tr>
-                      <td><h6>Keterangan </h6></td>
-                      <td>:</td>
-                      <td>
+                      <td class="p-2"><h6 class="mb-0">Keterangan </h6></td>
+                      <td class="p-2"><h6 class="mb-0">:</h6></td>
+                      <td class="p-2">
                         <h6>
                           @if ($loan->keterangan != null)
                             {{ $loan->keterangan }}
@@ -54,6 +54,17 @@
                         </h6>
                       </td>
                     </tr>
+                    @if ($loan->edit_id != null)
+                    <tr>
+                      <td colspan="3" class="text-center p-2">
+                        <a href="{{ route('pengembalian.history', $loan->id) }}">
+                          <span class="badge badge-info">
+                            &ensp; <i class="fa fa-edit"></i> &ensp; Data Pernah di-Edit / di-Ubah
+                          </span>
+                        </a>
+                      </td>
+                    </tr>
+                    @endif
                   </table>
                 </div>
               </div>

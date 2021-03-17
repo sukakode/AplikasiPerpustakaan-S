@@ -1,6 +1,6 @@
 <footer class="main-footer">
   <div class="float-right d-none d-sm-inline">
-    Anything you want
+    SukaKode - SiPerpusWeb
   </div>
-  <strong>Copyright &copy; 2014-2019 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
+  <strong>Copyright &copy; 2021 <a href="https://sukakode.com">SukaKode.com</a></strong> All rights reserved.
 </footer>

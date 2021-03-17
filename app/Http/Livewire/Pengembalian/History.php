@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Livewire\Peminjaman;
+namespace App\Http\Livewire\Pengembalian;
 
-use App\Models\BorrowHeader;
+use App\Models\LoanReturn;
 use Livewire\Component;
 
 class History extends Component
 {
-  public $header = [];
+  public $loan = [];
   public $history = [];
   public $totalEdit = 0;
 
@@ -15,23 +15,25 @@ class History extends Component
     'get-history' => 'getHistory',
   ];
 
-  public function mount($header)
+  public function mount($loan)
   {
-    $this->header = $header;
+    $this->loan = $loan;
   }
 
   public function render()
   {
-    return view('livewire.peminjaman.history');
+    return view('livewire.pengembalian.history');
   }
-
+  
   public function getHistory($id)
   {
     try {
-      $history = BorrowHeader::onlyTrashed()
-        ->with('detail')
-        ->with('detail.buku')
-        ->with('anggota')
+      $history = LoanReturn::onlyTrashed()
+        ->with('header')
+        ->with('header.detail')
+        ->with('header.detail.buku')
+        ->with('header.anggota')
+        ->with('header.user')
         ->with('user')
         ->where('id', '=', $id)->firstOrFail();
       $this->history[$history->id] = $history->toArray();

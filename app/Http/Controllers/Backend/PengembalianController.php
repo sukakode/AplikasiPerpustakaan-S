@@ -63,4 +63,11 @@ class PengembalianController extends Controller
     $pdf = PDF::loadview('backend.print.pengembalian', compact('tgl', 'data'));
     return $pdf->stream();
   }
+
+  public function history(LoanReturn $pengembalian)
+  {
+    return view('backend.pengembalian.history', [
+      'loan' => $pengembalian,
+    ]);
+  }
 }

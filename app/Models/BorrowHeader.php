@@ -16,17 +16,17 @@ class BorrowHeader extends CustomModel
 
   public function detail()
   {
-    return $this->hasMany('App\Models\BorrowDetail', 'header_id', 'id');
+    return $this->hasMany('App\Models\BorrowDetail', 'header_id', 'id')->withTrashed();
   }
 
   public function user()
   {
-    return $this->belongsTo('App\User', 'user_id', 'id');
+    return $this->belongsTo('App\User', 'user_id', 'id')->withTrashed();
   }
 
   public function anggota()
   {
-    return $this->belongsTo('App\Models\Member', 'anggota_id', 'id');
+    return $this->belongsTo('App\Models\Member', 'anggota_id', 'id')->withTrashed();
   }
 
   public function pengembalian()

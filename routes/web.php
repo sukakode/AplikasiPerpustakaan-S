@@ -36,6 +36,7 @@ Route::middleware(['auth'])->group(function () {
     Route::group(['prefix' => 'pengembalian', 'as' => 'pengembalian.'], function() {
       Route::get('/', 'Backend\PengembalianController@index')->name('index');
       Route::delete('/{pengembalian}/delete', 'Backend\PengembalianController@destroy')->name('destroy');
+      Route::get('/{pengembalian}/history', 'Backend\PengembalianController@history')->name('history');
     });
 
     Route::group(['prefix' => 'restore', 'as' => 'restore.'], function () {
