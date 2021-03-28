@@ -37,6 +37,10 @@
     Laporan Data Anggota
     <small class="float-right">
       Tanggal Print : {{ $tgl }}
+      @if (isset($tgl_awal) && isset($tgl_akhir))
+      <br>
+      Dari Tanggal : {{ $tgl_awal }} - {{ $tgl_akhir }}
+      @endif
     </small> 
   </p>
   <hr>
@@ -44,23 +48,29 @@
 	<table class='table table-bordered'>
     <thead>
       <tr>
-        <th class="text-center">No.</th>
-        <th class="text-center">Nama Anggota</th>
-        <th class="text-center">Alamat Anggota</th>
-        <th class="text-center">No. Telp</th> 
+        <th class="text-center p-2"><small class="font-weight-bold">No.</small></th>
+        <th class="text-center p-2"><small class="font-weight-bold">Nama Anggota</small></th>
+        <th class="text-center p-2"><small class="font-weight-bold">Alamat Anggota</small></th>
+        <th class="text-center p-2"><small class="font-weight-bold">No. Telp</small></th> 
+        @if (isset($trash) && $trash)
+          <th class="text-center p-2"><small class="font-weight-bold">Terhapus</small></th>
+        @endif
       </tr>
     </thead>
     <tbody>
       @forelse ($data as $item)
         <tr>
-          <td class="text-center p-2">{{ $loop->iteration }}</td>
-          <td class="text-center p-2">{{ $item->nama_anggota}}</td>
-          <td class="text-center p-2">{{ $item->alamat_anggota}}</td>
-          <td class="text-center p-2">(+62) {{ $item->telp_anggota}}</td> 
+          <td class="text-center p-2"><small>{{ $loop->iteration }}</small></td>
+          <td class="text-center p-2"><small>{{ $item->nama_anggota}}</small></td>
+          <td class="text-center p-2"><small>{{ $item->alamat_anggota}}</small></td>
+          <td class="text-center p-2"><small>(+62) {{ $item->telp_anggota}}</small></td> 
+          @if (isset($trash) && $trash)
+            <td class="text-center p-2"><small>{{ $item->deleted_at != null ? date('d/m/Y', strtotime($item->deleted_at)):'-' }}</small></td>
+          @endif
         </tr>
       @empty
         <tr>
-          <td colspan="4" class="text-center">
+          <td colspan="{{ $trash ? '5':'4' }}" class="text-center">
             Belum Ada Data Anggota.
           </td>
         </tr>

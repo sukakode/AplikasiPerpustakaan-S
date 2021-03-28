@@ -37,6 +37,10 @@
     Laporan Data Petugas
     <small class="float-right">
       Tanggal Print : {{ $tgl }}
+      @if (isset($tgl_awal) && isset($tgl_akhir))
+      <br>
+      Dari Tanggal : {{ $tgl_awal }} - {{ $tgl_akhir }}
+      @endif
     </small> 
   </p>
   <hr>
@@ -48,6 +52,9 @@
         <th class="text-center">Nama Petugas</th>
         <th class="text-center">E-Mail Petugas</th>
         <th class="text-center">Level Petugas</th> 
+        @if (isset($trash) && $trash)
+          <th class="text-center p-2"><small class="font-weight-bold">Terhapus</small></th>
+        @endif
       </tr>
     </thead>
     <tbody>
@@ -57,6 +64,9 @@
           <td class="text-center p-2">{{ $item->name }}</td>
           <td class="text-center p-2">{{ $item->email }}</td>
           <td class="text-center p-2">{{ $item->getRoleNames()->first() }}</td> 
+          @if (isset($trash) && $trash)
+            <td class="text-center p-2"><small>{{ $item->deleted_at != null ? date('d/m/Y', strtotime($item->deleted_at)):'-' }}</small></td>
+          @endif
         </tr>
       @empty
         <tr>

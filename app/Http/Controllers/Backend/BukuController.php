@@ -171,4 +171,39 @@ class BukuController extends Controller
       $pdf = PDF::loadview('backend.print.buku', compact('tgl', 'data'));
       return $pdf->stream();
     }
+
+    public function report()
+    {
+      $buku = Book::orderBy('created_at', 'DESC')->get();
+      $trashed = Book::orderBy('deleted_at', 'DESC')->onlyTrashed()->get();
+      return view('backend.buku.report', compact('buku', 'trashed'));
+    }
+
+    public function reportPrint(Request $request)
+    {
+      try {
+        $hapus = str_replace(" ", "", $request->tanggal);
+        $hapus = str_replace("-", "/", $hapus);
+        $explode = explode("/", $hapus);
+        $tgl_awal = $explode[2] . '-' . $explode[1] . '-' . $explode[0];
+        $tgl_akhir = $explode[5] . '-' . $explode[4] . '-' . $explode[3];
+        
+        $trash = false;
+        if (isset($request->deleted) && $request->deleted !== null) {
+          $data = Book::withTrashed()->whereBetween('created_at', [$tgl_awal, $tgl_akhir])->orderBy('judul')->get();
+          $trash = true;
+        } else {
+          $data = Book::whereBetween('created_at', [$tgl_awal, $tgl_akhir])->orderBy('judul')->get();
+        }  
+
+        $tgl = date('d/m/Y H:i:s');
+        $tgl_awal = date('d/m/Y', strtotime($tgl_awal));
+        $tgl_akhir = date('d/m/Y', strtotime($tgl_akhir));
+        $pdf = PDF::loadview('backend.print.buku', compact('tgl', 'data', 'trash', 'tgl_awal', 'tgl_akhir'));
+        return $pdf->stream();
+      } catch (\Exception $e) {
+        session()->flash('error', 'Terjadi Kesalahan !');
+        return redirect()->back();
+      }
+    }
 }

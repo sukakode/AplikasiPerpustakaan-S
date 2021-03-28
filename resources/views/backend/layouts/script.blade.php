@@ -1,6 +1,8 @@
 <!-- jQuery -->
 <script src="{{ asset('assets') }}/plugins/jquery/jquery.min.js"></script>
 
+<script src="{{ asset('assets') }}/dist/js/moment.min.js"></script>
+
 <!-- Bootstrap 4 -->
 <script src="{{ asset('assets') }}/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 
@@ -12,6 +14,10 @@
 
 <!-- Select2 -->
 <script src="{{ asset('assets') }}/plugins/select2/js/select2.full.min.js"></script>
+
+<!-- date-range-picker -->
+<script src="{{ asset('assets') }}/plugins/daterangepicker/daterangepicker.js"></script>
+
 
 @livewireScripts
 

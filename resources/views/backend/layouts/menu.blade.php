@@ -48,11 +48,52 @@
         <p>Data Peminjaman</p>
       </a>
     </li>
+    <li class="nav-item">
+      <a href="{{ route('pengembalian.index') }}" class="nav-link">
+        <i class="nav-icon fa fa-book text-purple"></i>
+        <p>Data Pengembalian</p>
+      </a>
+    </li>
   </ul>
 </li>
-<li class="nav-item">
-  <a href="{{ route('pengembalian.index') }}" class="nav-link">
-    <i class="nav-icon fa fa-book text-purple"></i>
-    <p>Data Pengembalian</p>
+<li class="nav-item has-treeview">
+  <a href="#" class="nav-link">
+    <i class="nav-icon fas fa-print text-orange"></i>
+    <p>
+      Laporan
+      <i class="right fas fa-angle-left"></i>
+    </p>
   </a>
+  <ul class="nav nav-treeview">
+    <li class="nav-item">
+      <a href="{{ route('report.buku') }}" class="nav-link">
+        <i class="far fa-circle nav-icon"></i>
+        <p>Buku</p>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a href="{{ route('report.anggota') }}" class="nav-link">
+        <i class="far fa-circle nav-icon"></i>
+        <p>Anggota</p>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a href="{{ route('report.petugas') }}" class="nav-link">
+        <i class="far fa-circle nav-icon"></i>
+        <p>Petugas</p>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a href="{{ route('petugas.index') }}" class="nav-link">
+        <i class="far fa-circle nav-icon"></i>
+        <p>Peminjaman Buku</p>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a href="{{ route('petugas.index') }}" class="nav-link">
+        <i class="far fa-circle nav-icon"></i>
+        <p>Pengembalian Buku</p>
+      </a>
+    </li>
+  </ul>
 </li>

@@ -86,7 +86,7 @@
               <span class="badge badge-danger">
                 &ensp; <i class="fa fa-times"></i> &ensp; Belum di-Kembalikan &ensp;
               </span>
-            @endif
+            @endif 
           </h6>
           <div class="table-responsive">
             <table class="table table-bordered">

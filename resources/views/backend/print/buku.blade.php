@@ -37,6 +37,10 @@
     Laporan Data Buku
     <small class="float-right">
       Tanggal Print : {{ $tgl }}
+      @if (isset($tgl_awal) && isset($tgl_akhir))
+      <br>
+      Dari Tanggal : {{ $tgl_awal }} - {{ $tgl_akhir }}
+      @endif
     </small> 
   </p>
   <hr>
@@ -44,25 +48,31 @@
 	<table class='table table-bordered'>
     <thead>
       <tr>
-        <th class="text-center">No.</th>
-        <th class="text-center">Judul</th>
-        <th class="text-center">Pengarang</th>
-        <th class="text-center">Penerbit</th>
-        <th class="text-center">Tahun</th>
+        <th class="text-center p-2"><small class="font-weight-bold">No.</small></th>
+        <th class="text-center p-2"><small class="font-weight-bold">Judul</small></th>
+        <th class="text-center p-2"><small class="font-weight-bold">Pengarang</small></th>
+        <th class="text-center p-2"><small class="font-weight-bold">Penerbit</small></th>
+        <th class="text-center p-2"><small class="font-weight-bold">Tahun</small></th>
+        @if (isset($trash) && $trash)
+          <th class="text-center p-2"><small class="font-weight-bold">Terhapus</small></th>
+        @endif
       </tr>
     </thead>
 		<tbody> 
       @forelse ($data as $item)
         <tr>
-          <td class="text-center p-2">{{ $loop->iteration }}</td>
-          <td class="text-center p-2">{{ $item->judul }}</td>
-          <td class="text-center p-2">{{ $item->pengarang }}</td>
-          <td class="text-center p-2">{{ $item->penerbit }}</td>
-          <td class="text-center p-2">{{ $item->tahun }}</td>
+          <td class="text-center p-2"><small>{{ $loop->iteration }}</small></td>
+          <td class="text-center p-2"><small>{{ $item->judul }}</small></td>
+          <td class="text-center p-2"><small>{{ $item->pengarang }}</small></td>
+          <td class="text-center p-2"><small>{{ $item->penerbit }}</small></td>
+          <td class="text-center p-2"><small>{{ $item->tahun }}</small></td>
+          @if (isset($trash) && $trash)
+            <td class="text-center p-2"><small>{{ $item->deleted_at != null ? date('d/m/Y', strtotime($item->deleted_at)):'-' }}</small></td>
+          @endif
         </tr>
       @empty
         <tr>
-          <td colspan="5" class="text-center">
+          <td colspan="{{ $trash ? '6':'5' }}" class="text-center">
             Belum Ada Data.
           </td>
         </tr>
