@@ -42,7 +42,8 @@ return [
     |
     */
 
-    'asset_url'  => null,
+    // 'asset_url'  => "/public", // Hosting
+    'asset_url'  => "http://localhost/SK-Perpus/public", // Localhost
 
     /*
     |--------------------------------------------------------------------------
