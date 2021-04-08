@@ -90,7 +90,7 @@
       </a>
     </li>
     <li class="nav-item">
-      <a href="{{ route('petugas.index') }}" class="nav-link">
+      <a href="{{ route('report.pengembalian') }}" class="nav-link">
         <i class="far fa-circle nav-icon"></i>
         <p>Pengembalian Buku</p>
       </a>

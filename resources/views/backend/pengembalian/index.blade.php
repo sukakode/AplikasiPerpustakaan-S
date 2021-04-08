@@ -192,7 +192,7 @@
       window.livewire.emit('clear-attr');
     });
 
-    // Info Pengembalian
+    // Edit Pengembalian
     window.livewire.on('openPengembalianEdit', () => {
       $('#modal-detail-return').modal('hide');
       $('#modal-pengembalian-edit').modal('show');

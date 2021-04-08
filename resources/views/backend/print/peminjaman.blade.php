@@ -37,6 +37,10 @@
     Laporan Data Anggota
     <small class="float-right">
       Tanggal Print : {{ $tgl }}
+      @if (isset($tgl_awal) && isset($tgl_akhir))
+      <br>
+      Data Tanggal : {{ $tgl_awal }} - {{ $tgl_akhir }}
+      @endif
     </small> 
   </p>
   <hr>

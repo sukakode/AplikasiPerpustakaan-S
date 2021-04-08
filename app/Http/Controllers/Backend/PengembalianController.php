@@ -70,4 +70,47 @@ class PengembalianController extends Controller
       'loan' => $pengembalian,
     ]);
   }
+
+  public function report()
+  {
+    $pengembalian = LoanReturn::orderBy('created_at', 'DESC')->get();
+    $trashed = LoanReturn::onlyTrashed()->where('new_id', '=', null)->orderBy('deleted_at', 'DESC')->get();
+    return view('backend.pengembalian.report', compact('pengembalian', 'trashed')); 
+  }
+
+  public function reportPrint(Request $request)
+  {
+    try {
+      $hapus = str_replace(" ", "", $request->tanggal);
+      $hapus = str_replace("-", "/", $hapus);
+      $explode = explode("/", $hapus);
+      $tgl_awal = $explode[2] . '-' . $explode[1] . '-' . $explode[0];
+      $tgl_akhir = $explode[5] . '-' . $explode[4] . '-' . $explode[3];
+      
+      $trash = false;
+      if (isset($request->deleted) && $request->deleted !== null) {
+        $data = LoanReturn::withTrashed()->where('new_id', '=', null)->whereBetween('created_at', [$tgl_awal, $tgl_akhir])->orderBy('tgl_kembali')->get();
+        $trash = true;
+      } else {
+        $data = LoanReturn::whereBetween('created_at', [$tgl_awal, $tgl_akhir])->orderBy('tgl_kembali')->get();
+      }  
+
+      $tgl = date('d/m/Y H:i:s');
+      $tgl_awal = date('d/m/Y', strtotime($tgl_awal));
+      $tgl_akhir = date('d/m/Y', strtotime($tgl_akhir));
+
+      $view = "backend.print.pengembalian";
+      // if (isset($request->detail) && $request->detail !== null) { 
+      //   $view = "backend.print.pengembalian";
+      // } else {
+      //   $view = "backend.print.pengembalian-wo";
+      // }
+
+      $pdf = PDF::loadview($view, compact('tgl', 'data', 'trash', 'tgl_awal', 'tgl_akhir'));
+      return $pdf->stream();
+    } catch (\Exception $e) {
+      session()->flash('error', 'Terjadi Kesalahan !');
+      return redirect()->back();
+    }
+  }
 }

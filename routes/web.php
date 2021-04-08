@@ -57,6 +57,7 @@ Route::middleware(['auth'])->group(function () {
       Route::get('peminjaman', 'Backend\PeminjamanController@print')->name('peminjaman');
       Route::post('peminjaman', 'Backend\PeminjamanController@reportPrint')->name('peminjaman');
       Route::get('pengembalian', 'Backend\PengembalianController@print')->name('pengembalian');
+      Route::post('pengembalian', 'Backend\PengembalianController@reportPrint')->name('pengembalian');
     });
 
     Route::group(['prefix' => 'report', 'as' => 'report.'], function() {
@@ -64,6 +65,7 @@ Route::middleware(['auth'])->group(function () {
       Route::get('anggota', 'Backend\AnggotaController@report')->name('anggota');
       Route::get('petugas', 'Backend\PetugasController@report')->name('petugas');
       Route::get('peminjaman', 'Backend\PeminjamanController@report')->name('peminjaman');
+      Route::get('pengembalian', 'Backend\PengembalianController@report')->name('pengembalian');
     });
   });
 });

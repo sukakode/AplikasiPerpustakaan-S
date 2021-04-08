@@ -36,7 +36,11 @@
     <br>
     Laporan Data Pengembalian
     <small class="float-right">
-      Tanggal Print : {{ $tgl }}
+      Tanggal Print : {{ $tgl }} 
+      @if (isset($tgl_awal) && isset($tgl_akhir))
+      <br>
+      Dari Tanggal : {{ $tgl_awal }} - {{ $tgl_akhir }}
+      @endif
     </small> 
   </p>
   <hr>
@@ -49,7 +53,7 @@
         <th class="text-center p-2"><small class="font-weight-bold">Keterlambatan</small></th>
         <th class="text-center p-2"><small class="font-weight-bold">Denda</small></th>
         <th class="text-center p-2"><small class="font-weight-bold">Denda Lainnya</small></th>
-        <th class="text-center p-2"><small class="font-weight-bold">Keterangan</small></th> 
+        <th class="text-center p-2"><small class="font-weight-bold">Keterangan</small></th>  
       </tr>
     </thead>
     <tbody>

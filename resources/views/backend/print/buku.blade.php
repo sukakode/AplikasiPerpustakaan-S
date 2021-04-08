@@ -39,7 +39,7 @@
       Tanggal Print : {{ $tgl }}
       @if (isset($tgl_awal) && isset($tgl_akhir))
       <br>
-      Dari Tanggal : {{ $tgl_awal }} - {{ $tgl_akhir }}
+      Data Tanggal : {{ $tgl_awal }} - {{ $tgl_akhir }}
       @endif
     </small> 
   </p>
