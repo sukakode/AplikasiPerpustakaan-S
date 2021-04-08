@@ -30,7 +30,8 @@
       <form action="{{ route('login') }}" method="post">
         @csrf
         <div class="input-group mb-3">
-          <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" placeholder="Masukan E-Mail Pengguna..." name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+          {{-- <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" placeholder="Masukan E-Mail Pengguna..." name="email" value="{{ old('email') }}" required autocomplete="email" autofocus> --}}
+          <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" placeholder="Masukan E-Mail Pengguna..." name="email" value="superadmin@mail.com" required autocomplete="email" autofocus>
           
           <div class="input-group-append">
             <div class="input-group-text">
@@ -46,7 +47,7 @@
         </div>
 
         <div class="input-group mb-3">
-          <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" placeholder="Masukan Password Pengguna.." name="password" required autocomplete="current-password">
+          <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" placeholder="Masukan Password Pengguna.." name="password" value="superadmin" required autocomplete="current-password">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>

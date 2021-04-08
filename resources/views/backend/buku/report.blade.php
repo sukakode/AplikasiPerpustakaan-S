@@ -33,7 +33,7 @@
             <div class="row">
               <div class="col-lg-5 col-xl-5">
                 <div class="form-group">
-                  <label for="" class="text-sm">Tanggal Mulai Sampai Tanggal ( tanggal/bulan/tahun ) : </label>
+                  <label for="" class="text-sm">Tanggal Mulai - Sampai Tanggal ( tanggal/bulan/tahun ) : </label>
                   <div class="input-group">
                     <div class="input-group-prepend">
                       <span class="input-group-text">
@@ -65,7 +65,7 @@
                 <div class="form-group">
                   <label for="" class="d-none d-lg-block d-xl-block">&ensp;</label>
                   <button type="reset" class="btn btn-outline-danger btn-sm btn-block">
-                    <span class="fa fa-undo"></span> &ensp; Reset Data
+                    <span class="fa fa-undo"></span> &ensp; Reset
                   </button>
                 </div>
               </div>

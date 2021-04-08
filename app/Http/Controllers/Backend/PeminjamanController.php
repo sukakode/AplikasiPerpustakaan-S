@@ -197,4 +197,47 @@ class PeminjamanController extends Controller
       'header' => $peminjaman,
     ]);
   }
+
+  public function report()
+  {
+    $peminjaman = BorrowHeader::orderBy('created_at', 'DESC')->get();
+    $trashed = BorrowHeader::onlyTrashed()->where('new_id', '=', null)->orderBy('deleted_at', 'DESC')->get();
+    return view('backend.peminjaman.report', compact('peminjaman', 'trashed'));
+  }
+
+  public function reportPrint(Request $request)
+  {
+    try {
+      $hapus = str_replace(" ", "", $request->tanggal);
+      $hapus = str_replace("-", "/", $hapus);
+      $explode = explode("/", $hapus);
+      $tgl_awal = $explode[2] . '-' . $explode[1] . '-' . $explode[0];
+      $tgl_akhir = $explode[5] . '-' . $explode[4] . '-' . $explode[3];
+      
+      $trash = false;
+      if (isset($request->deleted) && $request->deleted !== null) {
+        $data = BorrowHeader::withTrashed()->where('new_id', '=', null)->whereBetween('created_at', [$tgl_awal, $tgl_akhir])->orderBy('tanggal_pinjam')->get();
+        $trash = true;
+      } else {
+        $data = BorrowHeader::whereBetween('created_at', [$tgl_awal, $tgl_akhir])->orderBy('tanggal_pinjam')->get();
+      }  
+
+      $tgl = date('d/m/Y H:i:s');
+      $tgl_awal = date('d/m/Y', strtotime($tgl_awal));
+      $tgl_akhir = date('d/m/Y', strtotime($tgl_akhir));
+
+      $view = "backend.print.peminjaman";
+      if (isset($request->detail) && $request->detail !== null) { 
+        $view = "backend.print.peminjaman";
+      } else {
+        $view = "backend.print.peminjaman-wo";
+      }
+
+      $pdf = PDF::loadview($view, compact('tgl', 'data', 'trash', 'tgl_awal', 'tgl_akhir'));
+      return $pdf->stream();
+    } catch (\Exception $e) {
+      session()->flash('error', 'Terjadi Kesalahan !');
+      return redirect()->back();
+    }
+  }
 }

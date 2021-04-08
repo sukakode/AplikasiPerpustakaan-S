@@ -4,9 +4,9 @@
 <div class="col-12">
   <div class="card card-outline card-primary card-outline-tabs">
     <div class="card-header p-0">
-      <h4 class="card-title p-2"> &ensp; <span class="fa fa-print text-indigo"></span> &ensp; Laporan Data Anggota</h4> 
+      <h4 class="card-title p-2"> &ensp; <span class="fa fa-print text-orange"></span> &ensp; Laporan Data Peminjaman Buku</h4> 
       <div class="card-tools">
-        <a href="{{ route('print.anggota') }}" target="_blank" class="btn btn-xs btn-info">
+        <a href="{{ route('print.peminjaman') }}" target="_blank" class="btn btn-xs btn-info">
           <span class="fa fa-print"></span> &ensp; Print Semua Data
         </a> 
       </div>
@@ -28,7 +28,7 @@
     <div class="card-body p-0">
       <div class="tab-content pl-4 pr-4 pt-2 pb-2" id="custom-tabs-four-tabContent">
         <div class="tab-pane fade show active" id="custom-tabs-four-home" role="tabpanel" aria-labelledby="custom-tabs-four-home-tab">
-          <form action="{{ route('print.anggota') }}" method="post" target="_blank">
+          <form action="{{ route('print.peminjaman') }}" method="post" target="_blank">
             @csrf
             <div class="row">
               <div class="col-lg-5 col-xl-5">
@@ -44,7 +44,16 @@
                   </div>
                 </div>
               </div> 
-              <div class="col-lg-3 col-xl-3">
+              <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3 col-xl-3">
+                <div class="form-group">
+                  <label for="" class="text-sm">Dengan Detail Data ?</label>
+                  <div class="custom-control custom-checkbox">
+                    <input class="custom-control-input" type="checkbox" id="detail" name="detail" value="1">
+                    <label for="detail" class="custom-control-label font-weight-normal">Ya, Dengan Detail</label>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3 col-xl-3">
                 <div class="form-group">
                   <label for="" class="text-sm">Dengan Data Terhapus ?</label>
                   <div class="custom-control custom-checkbox">
@@ -53,19 +62,19 @@
                   </div>
                 </div>
               </div>
-              <div class="col-xs-12 col-sm-6 col-md-6 col-lg-2 col-xl-2">
+              <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3 col-xl-3">
                 <div class="form-group">
-                  <label for="" class="d-none d-lg-block d-xl-block">&ensp;</label>
+                  {{-- <label for="" class="d-none d-lg-block d-xl-block">&ensp;</label> --}}
                   <button type="submit" class="btn btn-outline-info btn-sm btn-block">
                     <span class="fa fa-check"></span> &ensp; Print Data
                   </button>
                 </div>
               </div>
-              <div class="col-xs-12 col-sm-6 col-md-6 col-lg-2 col-xl-2">
+              <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3 col-xl-3">
                 <div class="form-group">
-                  <label for="" class="d-none d-lg-block d-xl-block">&ensp;</label>
+                  {{-- <label for="" class="d-none d-lg-block d-xl-block">&ensp;</label> --}}
                   <button type="reset" class="btn btn-outline-danger btn-sm btn-block">
-                    <span class="fa fa-undo"></span> &ensp; Reset
+                    <span class="fa fa-undo"></span> &ensp; Reset Data
                   </button>
                 </div>
               </div>
@@ -77,52 +86,54 @@
         </div>
       </div>
       <div class="table-responsive">
-        
-        <table class="table table-bordered m-0">
+        <table class="table">
           <thead>
             <tr>
               <th class="text-center">No.</th>
-              <th class="text-center">Nama Anggota</th>
-              <th class="text-center">Alamat Anggota</th>
-              <th class="text-center">No. Telp</th>
+              <th class="text-center">Tanggal</th>
+              <th class="text-center">Anggota</th>
+              <th class="text-center">Penginput</th>
+              <th class="text-center">Total Buku</th>
               <th class="text-center">Aksi</th>
             </tr>
           </thead>
           <tbody>
-            @forelse ($anggota as $item)
+            @forelse ($peminjaman as $item)
               <tr>
                 <td class="text-center">{{ $loop->iteration }}.</td>
-                <td class="text-center">{{ $item->nama_anggota}}</td>
-                <td class="text-center">{{ $item->alamat_anggota}}</td>
-                <td class="text-center">(+62) {{ $item->telp_anggota}}</td>
+                <td class="text-center">{{ date('d/m/Y', strtotime($item->tanggal_pinjam)) }}</td>
+                <td class="text-center">{{ $item->anggota->nama_anggota }}</td>
+                <td class="text-center">{{ $item->user->name }}</td>
+                <td class="text-center">{{ $item->total_buku }} Buku</td>
                 <td class="text-center">
                   <div class="btn-group">
-                    <a href="{{ route('anggota.edit', $item->id) }}" class="btn btn-sm btn-warning borad text-white">
-                      <span class="fa fa-edit"></span>
-                    </a>
-                    <form action="{{ route('anggota.destroy', $item->id) }}" method="post">
-                      @csrf
-                      @method('DELETE')
-                      <button type="submit" class="btn btn-danger btn-sm borad">
-                        <span class="fa fa-trash"></span>
+                    <button data-id="{{ $item->id }}" class="btn btn-sm btn-info pr-3 pl-3 info-peminjaman">
+                      <span class="fa fa-info"></span>
+                    </button>
+                    @if ($item->pengembalian)
+                      <button data-id="{{ $item->id }}" class="btn btn-primary pr-3 pl-3 btn-sm info-pengembalian">
+                        <span class="fa fa-check"></span>
                       </button>
-                    </form>
+                    @else
+                      <button data-id="{{ $item->id }}" class="btn btn-success pr-3 pl-3 btn-sm pengembalian">
+                        <span class="fa fa-arrow-right"></span>
+                      </button>
+                    @endif
                   </div>
                 </td>
               </tr>
             @empty
               <tr>
-                <td colspan="5" class="text-center">
-                  Belum Ada Data Anggota.
-                </td>
+                <td class="text-center" colspan="6">Belum Data Peminjaman.</td>
               </tr>
             @endforelse
           </tbody>
         </table>
-      </div>
+      </div> 
     </div>
   </div>
 </div> 
+@livewire('peminjaman.detail')
 @endsection
 
 @section('script')
@@ -134,6 +145,29 @@
         format: 'DD/MM/YYYY'
       }
     });
+
+    // Info Peminjaman
+    $('.info-peminjaman').on('click', function(data) {
+      var id = $(this).data('id');
+      window.livewire.emit('get-peminjaman', id);
+    }); 
+
+    $('.info-peminjaman-trashed').on('click', function(data) {
+      var id = $(this).data('id');
+      window.livewire.emit('get-peminjaman-trashed', id);
+      $('#trashed-modal').modal('hide');
+    }); 
+
+    window.livewire.on('openDetail', () => {
+      $('#modal-detail').modal('show');
+    });
+
+    $('#modal-detail').on('hidden.bs.modal', function() {
+      window.livewire.emit('clear-attr');
+    });
+    // End
+
+
   });
 </script>
 @endsection

@@ -84,7 +84,7 @@
       </a>
     </li>
     <li class="nav-item">
-      <a href="{{ route('petugas.index') }}" class="nav-link">
+      <a href="{{ route('report.peminjaman') }}" class="nav-link">
         <i class="far fa-circle nav-icon"></i>
         <p>Peminjaman Buku</p>
       </a>

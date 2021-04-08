@@ -50,18 +50,10 @@
         <th class="text-center p-1"><small class="font-weight-bold">Penginput</small></th>
         <th class="text-center p-1"><small class="font-weight-bold">Total Buku</small></th> 
         <th class="text-center p-1"><small class="font-weight-bold">Status</small></th>
-      </tr>
-      <tr> 
-        <th class="text-center p-1"><small class="font-weight-bold">Detail</small></th>
-        <th colspan="4" class="pl-4 p-1"><small class="font-weight-bold">Judul Buku</small></th>
-        <th class="text-center p-1"><small class="font-weight-bold">Jumlah</small></th>
-      </tr>
+      </tr> 
     </thead>
     <tbody>
-      @forelse ($data as $item)
-        <tr>
-          <th colspan="6" class="p-1" style="background-color: #e9e9e9;"></th>
-        </tr>
+      @forelse ($data as $item) 
         <tr>
           <td class="text-center p-2"><small>{{ $no = $loop->iteration }}</small></td>
           <td class="text-center p-2"><small>{{ date('d/m/Y', strtotime($item['tanggal_pinjam'])) }}</small></td>
@@ -69,21 +61,14 @@
           <td class="text-center p-2"><small>{{ $item['user']['name'] }}</small></td>
           <td class="text-center p-2"><small>{{ $item['total_buku'] }} Buku</td> 
           <td class="text-center p-2"><small>{{ $item['pengembalian'] == null ? 'Belum di-Kembalikan':'di-Kembalikan' }}</td> 
-        </tr> 
-        @foreach ($item['detail'] as $item2)
-        <tr>
-          <td class="text-center p-2"><small>{{ $no }}.{{ $loop->iteration }}</small></td>
-          <td class="pl-4 p-2" colspan="4"><small>{{ $item2['buku']['judul'] }}</small></td>
-          <td class="text-center p-2"><small>{{ $item2['jumlah'] }} Buku</small></td> 
-        </tr>
-        @endforeach
+        </tr>   
       @empty
         <tr>
           <td class="text-center" colspan="6">Belum Data Peminjaman.</td>
         </tr>
       @endforelse
       <tr>
-        <td colspan="6" class="p-1" style="background-color: #e9e9e9;"></td>
+        <th colspan="6" class="p-1" style="background-color: #e9e9e9;"></th>
       </tr>
     </tbody>  
 	</table>

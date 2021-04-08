@@ -55,6 +55,7 @@ Route::middleware(['auth'])->group(function () {
       Route::get('petugas', 'Backend\PetugasController@print')->name('petugas');
       Route::post('petugas', 'Backend\PetugasController@reportPrint')->name('petugas');
       Route::get('peminjaman', 'Backend\PeminjamanController@print')->name('peminjaman');
+      Route::post('peminjaman', 'Backend\PeminjamanController@reportPrint')->name('peminjaman');
       Route::get('pengembalian', 'Backend\PengembalianController@print')->name('pengembalian');
     });
 
@@ -62,6 +63,7 @@ Route::middleware(['auth'])->group(function () {
       Route::get('buku', 'Backend\BukuController@report')->name('buku');
       Route::get('anggota', 'Backend\AnggotaController@report')->name('anggota');
       Route::get('petugas', 'Backend\PetugasController@report')->name('petugas');
+      Route::get('peminjaman', 'Backend\PeminjamanController@report')->name('peminjaman');
     });
   });
 });
