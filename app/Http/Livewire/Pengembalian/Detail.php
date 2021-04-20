@@ -11,10 +11,17 @@ class Detail extends Component
   public $loan = [];
   public $header = [];
 
+  public $report = null;
+
   protected $listeners = [
     'get-pengembalian' => 'getPengembalian',
     'clear-attr' => 'clearAttr'
   ];
+
+  public function mount($report = false)
+  {
+    $this->report = $report;
+  }
 
   public function render()
   {

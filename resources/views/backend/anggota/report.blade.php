@@ -23,6 +23,11 @@
             Pengaturan Print 
           </a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link disabled" id="custom-tabs-four-profile-tab" data-toggle="pill" href="#custom-tabs-four-profile" role="tab" aria-controls="custom-tabs-four-profile" aria-selected="false">
+            <span class="bg-lred">&ensp;</span> = Data Terhapus
+          </a>
+        </li>
       </ul>
     </div>
     <div class="card-body p-0">
@@ -85,30 +90,15 @@
               <th class="text-center">Nama Anggota</th>
               <th class="text-center">Alamat Anggota</th>
               <th class="text-center">No. Telp</th>
-              <th class="text-center">Aksi</th>
             </tr>
           </thead>
           <tbody>
             @forelse ($anggota as $item)
               <tr>
-                <td class="text-center">{{ $loop->iteration }}.</td>
-                <td class="text-center">{{ $item->nama_anggota}}</td>
-                <td class="text-center">{{ $item->alamat_anggota}}</td>
-                <td class="text-center">(+62) {{ $item->telp_anggota}}</td>
-                <td class="text-center">
-                  <div class="btn-group">
-                    <a href="{{ route('anggota.edit', $item->id) }}" class="btn btn-sm btn-warning borad text-white">
-                      <span class="fa fa-edit"></span>
-                    </a>
-                    <form action="{{ route('anggota.destroy', $item->id) }}" method="post">
-                      @csrf
-                      @method('DELETE')
-                      <button type="submit" class="btn btn-danger btn-sm borad">
-                        <span class="fa fa-trash"></span>
-                      </button>
-                    </form>
-                  </div>
-                </td>
+                <td class="text-center {{ $item->deleted_at != null ? 'bg-lred':'' }}">{{ $loop->iteration }}.</td>
+                <td class="text-center {{ $item->deleted_at != null ? 'bg-lred':'' }}">{{ $item->nama_anggota}}</td>
+                <td class="text-center {{ $item->deleted_at != null ? 'bg-lred':'' }}">{{ $item->alamat_anggota}}</td>
+                <td class="text-center {{ $item->deleted_at != null ? 'bg-lred':'' }}">(+62) {{ $item->telp_anggota}}</td>
               </tr>
             @empty
               <tr>

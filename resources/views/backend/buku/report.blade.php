@@ -23,6 +23,11 @@
             Pengaturan Print 
           </a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link disabled" id="custom-tabs-four-profile-tab" data-toggle="pill" href="#custom-tabs-four-profile" role="tab" aria-controls="custom-tabs-four-profile" aria-selected="false">
+            <span class="bg-lred">&ensp;</span> = Data Terhapus
+          </a>
+        </li>
       </ul>
     </div>
     <div class="card-body p-0">
@@ -86,32 +91,17 @@
               <th class="text-center">Penerbit</th>
               <th class="text-center">Tahun Terbit</th>
               <th class="text-center">Tanggal Buat</th>
-              <th class="text-center">Aksi</th>
             </tr>
           </thead>
           <tbody>
             @forelse ($buku as $item)
               <tr>
-                <td class="text-center">{{ $loop->iteration }}.</td>
-                <td class="text-center">{{ $item->judul }}</td>
-                <td class="text-center">{{ $item->pengarang }}</td>
-                <td class="text-center">{{ $item->penerbit }}</td>
-                <td class="text-center">{{ $item->tahun }}</td>
-                <td class="text-center">{{ date('d/m/Y H:i:s', strtotime($item->created_at)) }}</td>
-                <td class="text-center">
-                  <div class="btn-group">
-                    <a href="{{ route('buku.edit', $item->id) }}" class="btn btn-warning btn-sm borad" style="color: #fff !important;">
-                      <span class="fa fa-edit"></span>
-                    </a>
-                    <form action="{{ route('buku.destroy', $item->id) }}" method="post">
-                      @csrf 
-                      @method('DELETE')
-                      <button type="submit" class="btn btn-danger btn-sm borad">
-                        <span class="fa fa-trash"></span>
-                      </button>
-                    </form>
-                  </div>
-                </td>
+                <td class="text-center {{ $item->deleted_at != null ? 'bg-lred':'' }}">{{ $loop->iteration }}.</td>
+                <td class="text-center {{ $item->deleted_at != null ? 'bg-lred':'' }}">{{ $item->judul }}</td>
+                <td class="text-center {{ $item->deleted_at != null ? 'bg-lred':'' }}">{{ $item->pengarang }}</td>
+                <td class="text-center {{ $item->deleted_at != null ? 'bg-lred':'' }}">{{ $item->penerbit }}</td>
+                <td class="text-center {{ $item->deleted_at != null ? 'bg-lred':'' }}">{{ $item->tahun }}</td>
+                <td class="text-center {{ $item->deleted_at != null ? 'bg-lred':'' }}">{{ date('d/m/Y H:i:s', strtotime($item->created_at)) }}</td>
               </tr>
             @empty 
               <tr>

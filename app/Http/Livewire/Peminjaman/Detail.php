@@ -9,11 +9,18 @@ class Detail extends Component
 {
   public $header = [];
 
+  public $report = null;
+
   protected $listeners = [
     'get-peminjaman' => 'getPeminjaman',
     'get-peminjaman-trashed' => 'getPeminjamanTrashed',
     'clear-attr' => 'clearAttr',
   ];
+
+  public function mount($report = false)
+  {
+    $this->report = $report;
+  }
 
   public function render()
   {

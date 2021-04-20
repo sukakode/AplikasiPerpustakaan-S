@@ -200,9 +200,8 @@ class PeminjamanController extends Controller
 
   public function report()
   {
-    $peminjaman = BorrowHeader::orderBy('created_at', 'DESC')->get();
-    $trashed = BorrowHeader::onlyTrashed()->where('new_id', '=', null)->orderBy('deleted_at', 'DESC')->get();
-    return view('backend.peminjaman.report', compact('peminjaman', 'trashed'));
+    $peminjaman = BorrowHeader::withTrashed()->where('new_id', '=', null)->orderBy('created_at', 'DESC')->get();
+    return view('backend.peminjaman.report', compact('peminjaman'));
   }
 
   public function reportPrint(Request $request)

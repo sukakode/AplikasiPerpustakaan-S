@@ -174,9 +174,8 @@ class BukuController extends Controller
 
     public function report()
     {
-      $buku = Book::orderBy('created_at', 'DESC')->get();
-      $trashed = Book::orderBy('deleted_at', 'DESC')->onlyTrashed()->get();
-      return view('backend.buku.report', compact('buku', 'trashed'));
+      $buku = Book::withTrashed()->orderBy('created_at', 'DESC')->get();
+      return view('backend.buku.report', compact('buku'));
     }
 
     public function reportPrint(Request $request)

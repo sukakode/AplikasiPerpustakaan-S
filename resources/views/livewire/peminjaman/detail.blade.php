@@ -73,20 +73,22 @@
           @endif
         </div>
         <div class="modal-footer text-right">
-          @if (!empty($header))
-            @if (in_array("Super Admin", auth()->user()->getRoleNames()->toArray()))
-              @if ($header->pengembalian == null)
-                @if ($header->deleted_at == null)
-                  <form action="{{ route('peminjaman.destroy', $header->id) }}" method="post">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" class="btn btn-danger">Hapus Data </button>
-                  </form>
-                  <a href="{{ route('peminjaman.edit', $header->id) }}" class="btn btn-warning">Edit Data</a>
+          @if (!$report) 
+            @if (!empty($header))
+              @if (in_array("Super Admin", auth()->user()->getRoleNames()->toArray()))
+                @if ($header->pengembalian == null)
+                  @if ($header->deleted_at == null)
+                    <form action="{{ route('peminjaman.destroy', $header->id) }}" method="post">
+                      @csrf
+                      @method('DELETE')
+                      <button type="submit" class="btn btn-danger">Hapus Data </button>
+                    </form>
+                    <a href="{{ route('peminjaman.edit', $header->id) }}" class="btn btn-warning">Edit Data</a>
+                  @endif
                 @endif
               @endif
             @endif
-          @endif
+          @endif 
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup Modal</button>
         </div>
       </div>

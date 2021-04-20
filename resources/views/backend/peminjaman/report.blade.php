@@ -100,25 +100,16 @@
           <tbody>
             @forelse ($peminjaman as $item)
               <tr>
-                <td class="text-center">{{ $loop->iteration }}.</td>
-                <td class="text-center">{{ date('d/m/Y', strtotime($item->tanggal_pinjam)) }}</td>
-                <td class="text-center">{{ $item->anggota->nama_anggota }}</td>
-                <td class="text-center">{{ $item->user->name }}</td>
-                <td class="text-center">{{ $item->total_buku }} Buku</td>
-                <td class="text-center">
+                <td class="text-center {{ $item->deleted_at != null ? 'bg-lred':'' }}">{{ $loop->iteration }}.</td>
+                <td class="text-center {{ $item->deleted_at != null ? 'bg-lred':'' }}">{{ date('d/m/Y', strtotime($item->tanggal_pinjam)) }}</td>
+                <td class="text-center {{ $item->deleted_at != null ? 'bg-lred':'' }}">{{ $item->anggota->nama_anggota }}</td>
+                <td class="text-center {{ $item->deleted_at != null ? 'bg-lred':'' }}">{{ $item->user->name }}</td>
+                <td class="text-center {{ $item->deleted_at != null ? 'bg-lred':'' }}">{{ $item->total_buku }} Buku</td>
+                <td class="text-center {{ $item->deleted_at != null ? 'bg-lred':'' }}">
                   <div class="btn-group">
-                    <button data-id="{{ $item->id }}" class="btn btn-sm btn-info pr-3 pl-3 info-peminjaman">
+                    <button data-id="{{ $item->id }}" class="btn btn-sm btn-info pr-3 pl-3 {{ $item->deleted_at != null ? 'info-peminjaman-trashed':'info-peminjaman' }}">
                       <span class="fa fa-info"></span>
                     </button>
-                    @if ($item->pengembalian)
-                      <button data-id="{{ $item->id }}" class="btn btn-primary pr-3 pl-3 btn-sm info-pengembalian">
-                        <span class="fa fa-check"></span>
-                      </button>
-                    @else
-                      <button data-id="{{ $item->id }}" class="btn btn-success pr-3 pl-3 btn-sm pengembalian">
-                        <span class="fa fa-arrow-right"></span>
-                      </button>
-                    @endif
                   </div>
                 </td>
               </tr>
@@ -133,7 +124,7 @@
     </div>
   </div>
 </div> 
-@livewire('peminjaman.detail')
+@livewire('peminjaman.detail', ['report' => true])
 @endsection
 
 @section('script')

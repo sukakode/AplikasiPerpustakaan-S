@@ -217,9 +217,8 @@ class PetugasController extends Controller
 
     public function report()
     { 
-      $petugas = User::orderBy('created_at', 'DESC')->get();
-      $trashed = User::orderBy('deleted_at', 'DESC')->onlyTrashed()->get();
-      return view('backend.petugas.report', compact('petugas', 'trashed'));
+      $petugas = User::withTrashed()->orderBy('created_at', 'DESC')->get();
+      return view('backend.petugas.report', compact('petugas'));
     }
 
     public function reportPrint(Request $request)

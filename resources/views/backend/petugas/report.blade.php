@@ -23,6 +23,11 @@
             Pengaturan Print 
           </a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link disabled" id="custom-tabs-four-profile-tab" data-toggle="pill" href="#custom-tabs-four-profile" role="tab" aria-controls="custom-tabs-four-profile" aria-selected="false">
+            <span class="bg-lred">&ensp;</span> = Data Terhapus
+          </a>
+        </li>
       </ul>
     </div>
     <div class="card-body p-0">
@@ -84,36 +89,16 @@
               <th class="text-center">No.</th>
               <th class="text-center">Nama Petugas</th>
               <th class="text-center">E-Mail Petugas</th>
-              <th class="text-center">Level Petugas</th>
-              <th class="text-center">Aksi</th>
+              <th class="text-center">Level Petugas</th> 
             </tr>
           </thead>
           <tbody>
             @forelse ($petugas as $item)
               <tr>
-                <td class="text-center">{{ $loop->iteration }}.</td>
-                <td class="text-center">{{ $item->name }}</td>
-                <td class="text-center">{{ $item->email }}</td>
-                <td class="text-center">{{ $item->getRoleNames()->first() }}</td>
-                <td class="text-center">
-                  <div class="btn-group">
-                    @if ($item->getRoleNames()->first() == "Super Admin")
-                      <a href="#" class="btn btn-secondary btn-sm borad">Tidak Ada Aksi</a>
-                    @else
-                      <a href="{{ route('petugas.edit', $item->id) }}" class="btn btn-warning btn-sm text-white borad">
-                        <span class="fa fa-edit"></span>
-                      </a>
-                      <form action="{{ route('petugas.destroy', $item->id) }}" method="post">
-                        @csrf
-                        @method('DELETE')
-
-                        <button type="submit" class="btn btn-danger btn-sm borad">
-                          <span class="fa fa-trash"></span>
-                        </button>
-                      </form>
-                    @endif
-                  </div>
-                </td>
+                <td class="text-center {{ $item->deleted_at != null ? 'bg-lred':'' }}">{{ $loop->iteration }}.</td>
+                <td class="text-center {{ $item->deleted_at != null ? 'bg-lred':'' }}">{{ $item->name }}</td>
+                <td class="text-center {{ $item->deleted_at != null ? 'bg-lred':'' }}">{{ $item->email }}</td>
+                <td class="text-center {{ $item->deleted_at != null ? 'bg-lred':'' }}">{{ $item->getRoleNames()->first() }}</td> 
               </tr>
             @empty
               <tr>

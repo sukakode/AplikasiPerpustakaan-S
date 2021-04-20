@@ -103,28 +103,34 @@
           <tbody>
             @forelse ($pengembalian as $item)
               <tr>
-                <td class="text-center">{{ $loop->iteration }}.</td>
-                <td class="text-center">
+                <td class="text-center {{ $item->deleted_at != null ? 'bg-lred':'' }}">{{ $loop->iteration }}.</td>
+                <td class="text-center {{ $item->deleted_at != null ? 'bg-lred':'' }}">
                   <button data-id="{{ $item->header_id }}" class="btn btn-sm btn-info pr-3 pl-3 info-peminjaman">
                     Lihat Data
                   </button>
                 </td>
-                <td class="text-center">{{ date('d/m/Y', strtotime($item->tgl_kembali)) }}</td>
-                <td class="text-center">{{ $item->keterlambatan }} Hari</td>
-                <td class="text-center">Rp. {{ number_format($item->denda, 0, ',', '.') }}</td>
-                <td class="text-center">Rp. {{ number_format($item->denda_lainnya, 0, ',', '.') }}</td>
-                <td class="text-center">
+                <td class="text-center {{ $item->deleted_at != null ? 'bg-lred':'' }}">{{ date('d/m/Y', strtotime($item->tgl_kembali)) }}</td>
+                <td class="text-center {{ $item->deleted_at != null ? 'bg-lred':'' }}">{{ $item->keterlambatan }} Hari</td>
+                <td class="text-center {{ $item->deleted_at != null ? 'bg-lred':'' }}">Rp. {{ number_format($item->denda, 0, ',', '.') }}</td>
+                <td class="text-center {{ $item->deleted_at != null ? 'bg-lred':'' }}">Rp. {{ number_format($item->denda_lainnya, 0, ',', '.') }}</td>
+                <td class="text-center {{ $item->deleted_at != null ? 'bg-lred':'' }}">
                   @if ($item->keterangan != null)
                     {{ $item->keterangan }}
                   @else
                     <i><u>Tidak Ada Keterangan</u></i>
                   @endif
                 </td>
-                <td class="text-center">
+                <td class="text-center {{ $item->deleted_at != null ? 'bg-lred':'' }}">
                   <div class="btn-group">
-                    <button data-id="{{ $item->header->id }}" class="btn btn-sm btn-info pr-3 pl-3 info-pengembalian">
-                      <span class="fa fa-info"></span>
-                    </button>
+                    @if ($item->deleted_at != null)
+                      <button class="btn btn-sm btn-secondary pr-3 pl-3">
+                        <span class="fa fa-times"></span>
+                      </button>
+                    @else
+                      <button data-id="{{ $item->header->id }}" class="btn btn-sm btn-info pr-3 pl-3 info-pengembalian">
+                        <span class="fa fa-info"></span>
+                      </button>
+                    @endif
                   </div>
                 </td>
               </tr>
@@ -136,56 +142,11 @@
           </tbody>
         </table>
       </div>
-      {{-- <div class="table-responsive">
-        <table class="table">
-          <thead>
-            <tr>
-              <th class="text-center">No.</th>
-              <th class="text-center">Tanggal</th>
-              <th class="text-center">Anggota</th>
-              <th class="text-center">Penginput</th>
-              <th class="text-center">Total Buku</th>
-              <th class="text-center">Aksi</th>
-            </tr>
-          </thead>
-          <tbody>
-            @forelse ($peminjaman as $item)
-              <tr>
-                <td class="text-center">{{ $loop->iteration }}.</td>
-                <td class="text-center">{{ date('d/m/Y', strtotime($item->tanggal_pinjam)) }}</td>
-                <td class="text-center">{{ $item->anggota->nama_anggota }}</td>
-                <td class="text-center">{{ $item->user->name }}</td>
-                <td class="text-center">{{ $item->total_buku }} Buku</td>
-                <td class="text-center">
-                  <div class="btn-group">
-                    <button data-id="{{ $item->id }}" class="btn btn-sm btn-info pr-3 pl-3 info-peminjaman">
-                      <span class="fa fa-info"></span>
-                    </button>
-                    @if ($item->pengembalian)
-                      <button data-id="{{ $item->id }}" class="btn btn-primary pr-3 pl-3 btn-sm info-pengembalian">
-                        <span class="fa fa-check"></span>
-                      </button>
-                    @else
-                      <button data-id="{{ $item->id }}" class="btn btn-success pr-3 pl-3 btn-sm pengembalian">
-                        <span class="fa fa-arrow-right"></span>
-                      </button>
-                    @endif
-                  </div>
-                </td>
-              </tr>
-            @empty
-              <tr>
-                <td class="text-center" colspan="6">Belum Data Peminjaman.</td>
-              </tr>
-            @endforelse
-          </tbody>
-        </table>
-      </div>  --}}
     </div>
   </div>
 </div> 
-@livewire('peminjaman.detail')
-@livewire('pengembalian.detail') 
+@livewire('peminjaman.detail', ['report' => true])
+@livewire('pengembalian.detail', ['report' => true]) 
 @endsection
 
 @section('script')

@@ -43,6 +43,12 @@
   .sidebar-light-ungu .nav-sidebar>.nav-item>.nav-link.active {
     background-color: #5249b2 !important;
   }
+
+  .bg-lred, .bg-lred>a {
+    color: #000000 !important;
+    background-color: #ffcece5c !important;
+    /* background-color: #ffbbd4b5 !important; */
+  }
 </style>
 
 @yield('css')

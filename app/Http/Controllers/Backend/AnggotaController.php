@@ -169,9 +169,8 @@ class AnggotaController extends Controller
 
     public function report()
     {
-      $anggota = Member::orderBy('created_at', 'DESC')->get();
-      $trashed = Member::orderBy('deleted_at', 'DESC')->onlyTrashed()->get();
-      return view('backend.anggota.report', compact('anggota', 'trashed'));
+      $anggota = Member::withTrashed()->orderBy('created_at', 'DESC')->get();
+      return view('backend.anggota.report', compact('anggota'));
     }
 
     public function reportPrint(Request $request)

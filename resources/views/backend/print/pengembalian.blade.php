@@ -31,7 +31,7 @@
 </head>
 <body>  
   <p class="header">
-    <img src="{{ public_path('images') }}/SK.png" class="header-image">
+    <img src="{{ public_path('images') }}/SK_White.png" class="header-image">
     Suka Kode - Program Perpustakaan 
     <br>
     Laporan Data Pengembalian

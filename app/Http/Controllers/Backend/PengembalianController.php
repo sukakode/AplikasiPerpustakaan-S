@@ -73,9 +73,8 @@ class PengembalianController extends Controller
 
   public function report()
   {
-    $pengembalian = LoanReturn::orderBy('created_at', 'DESC')->get();
-    $trashed = LoanReturn::onlyTrashed()->where('new_id', '=', null)->orderBy('deleted_at', 'DESC')->get();
-    return view('backend.pengembalian.report', compact('pengembalian', 'trashed')); 
+    $pengembalian = LoanReturn::withTrashed()->where('new_id', '=', null)->orderBy('created_at', 'DESC')->get();
+    return view('backend.pengembalian.report', compact('pengembalian')); 
   }
 
   public function reportPrint(Request $request)
