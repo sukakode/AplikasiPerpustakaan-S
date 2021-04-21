@@ -43,7 +43,8 @@ return [
     */
 
     // 'asset_url'  => "/public", // Hosting
-    'asset_url'  => "http://localhost/SK-Perpus/public", // Localhost
+    // 'asset_url'  => "http://localhost/SK-Perpus/public", // Localhost
+    'asset_url'  => env('APP_URL').'/public', // Localhost
 
     /*
     |--------------------------------------------------------------------------
