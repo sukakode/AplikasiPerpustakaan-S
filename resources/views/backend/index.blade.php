@@ -81,9 +81,62 @@
 </div>
 
 
-<div class="col-12 col-sm-4 col-md-4">
-  <div class="card card-outline card-success">
-    
+<div class="col-12 col-sm-8 col-md-8">
+  <div class="card card-outline card-warning">
+    <div class="card-header">
+      <h4 class="card-title">
+        Data Pengembalian & Kas
+      </h4>
+    </div>
+    <div class="card-body p-0">
+      <div class="row">
+        <div class="col-12">
+          <div class="table-responsive">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th class="text-center">No.</th>
+                  <th class="text-center">Data Peminjaman</th>
+                  <th class="text-center">Tanggal Kembali</th>
+                  <th class="text-center">Denda</th>
+                  <th class="text-center">Denda Lainnya</th>
+                  <th class="text-center">Aksi</th>
+                </tr>
+              </thead>
+              <tbody>
+                @php
+                  $kas = 0;
+                @endphp
+                @forelse ($loan as $item)
+                  <tr>
+                    <td class="text-center">{{ $loop->iteration }}.</td>
+                    <td class="text-center">
+                      <button data-id="{{ $item->header_id }}" class="btn btn-sm btn-info pr-3 pl-3 info-peminjaman">
+                        Lihat Data
+                      </button>
+                    </td>
+                    <td class="text-center">{{ date('d/m/Y', strtotime($item->tgl_kembali)) }}</td>
+                    <td class="text-center">Rp. {{ number_format($item->denda, 0, ',', '.') }}</td>
+                    <td class="text-center">Rp. {{ number_format($item->denda_lainnya, 0, ',', '.') }}</td> 
+                    <td class="text-center">
+                      <div class="btn-group">
+                        <button data-id="{{ $item->header->id }}" class="btn btn-sm btn-info pr-3 pl-3 info-pengembalian">
+                          <span class="fa fa-info"></span>
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                @empty
+                  <tr>
+                    <td class="text-center" colspan="8">Belum Data Peminjaman.</td>
+                  </tr>
+                @endforelse
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 
