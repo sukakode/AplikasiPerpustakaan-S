@@ -49,7 +49,7 @@
 </div>
 
 <div class="col-12 col-sm-4 col-md-4">
-  <div class="card card-outline card-success">
+  <div class="card card-outline card-success" style="max-height: 300px; min-height: 300px; overflow: auto;">
     <div class="card-header">
       <h4 class="card-title text-center">Halo, {{ auth()->user()->name }}</h4>
     </div>
@@ -81,8 +81,8 @@
 </div>
 
 
-<div class="col-12 col-sm-8 col-md-8">
-  <div class="card card-outline card-warning">
+<div class="col-12 col-sm-8 col-md-8" >
+  <div class="card card-outline card-warning" style="min-height: 300px; max-height: 300px; overflow: auto;">
     <div class="card-header">
       <h4 class="card-title">
         Data Pengembalian & Kas
@@ -186,7 +186,9 @@
     </div>
   </form>
 
-</div>
+</div> 
+@livewire('peminjaman.detail', ['report' => true])
+@livewire('pengembalian.detail', ['report' => true])  
 @endsection
 
 @section('script')
@@ -214,6 +216,42 @@
     $('.select2').select2();
 
     display_c5()
+
+        // Info Peminjaman
+        $('.info-peminjaman').on('click', function(data) {
+      var id = $(this).data('id');
+      window.livewire.emit('get-peminjaman', id);
+    }); 
+
+    $('.info-peminjaman-trashed').on('click', function(data) {
+      var id = $(this).data('id');
+      window.livewire.emit('get-peminjaman-trashed', id);
+      $('#trashed-modal').modal('hide');
+    }); 
+
+    window.livewire.on('openDetail', () => {
+      $('#modal-detail').modal('show');
+    });
+
+    $('#modal-detail').on('hidden.bs.modal', function() {
+      window.livewire.emit('clear-attr');
+    });
+    // End
+
+    // Info Pengembalian
+    $('.info-pengembalian').on('click', function(data) {
+      var id = $(this).data('id');
+      window.livewire.emit('get-pengembalian', id);
+    });
+
+    window.livewire.on('openDetailReturn', () => {
+      $('#modal-detail-return').modal('show');
+    });
+
+    $('#modal-detail-return').on('hidden.bs.modal', function() {
+      window.livewire.emit('clear-attr');
+    });
+    // End
   });
 </script>
 @endsection
